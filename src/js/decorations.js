@@ -40,6 +40,14 @@ var finderDecorations = {
       '<span class="srch-lbl-lg">' + this.get('ORGANIZATION_NAME') + '</span><br>' +
       '<span class="srch-lbl-sm">' + this.get('LOCATION_NAME') + '<span>'
     );
+    this.set(
+      'age_group',
+      (this.get('AGE_0-5') || '0') + (this.get('AGE_5-24') || '0') + (this.get('AGE_25-60') || '0') + (this.get('AGE_60+') || '0')
+    );
+    this.set(
+      'crime_types',
+      (this.get('INTIMATE_PARTNER_VIOLENCE') || '0') + (this.get('FAMILY_VIOLENCE') || '0') + (this.get('SEXUAL_ASSAULT') || '0') + (this.get('VIOLENT_CRIME') || '0') + (this.get('PROPERTY/FINANCIAL_CRIMES') || '0') 
+    );
   },
   getCountAtLocation: function(){
     return finderDecorations.countByLocation[this.locationKey];
@@ -62,6 +70,9 @@ var finderDecorations = {
   getWebsite: function(){
     return this.get('WEBSITE')
   },
+  getAccessible: function(){
+    return this.get('WHEELCHAIR_ACCESS')
+  },
   cssClass: function() {
     return this.get('TYPE')
   },
@@ -70,7 +81,10 @@ var finderDecorations = {
     return div.html(this.get('LOCATION_NAME'));
   },
   nameHtml: function() {
-    return $('<h3 class="name notranslate"></h3>')
+    var result = '<h3 class="name notranslate"></h3>';
+    if(this.getAccessible())
+      result = '<h3 class="name notranslate accessible"></h3>';
+    return $(result)
       .html(this.getName())
       .add(this.locationHtml());
   },
