@@ -31,7 +31,7 @@ span.srch-lbl-sm {
   color: black;
 }
 .btn-sq:hover {
-  background-color: blue;
+  background-color: #B3DBE7;
 }
 
 .btn-z-in {
@@ -92,3 +92,15 @@ span.srch-lbl-sm {
   padding-left: 23px;
   padding-bottom: 5px;
 }
+
+.pop .btn-x {
+ background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2214px%22%20height%3D%2214px%22%3E%3Cpolygon%20points%3D%2214%2C3%2011%2C0%207%2C4%203%2C0%200%2C3%204%2C7%200%2C11%203%2C14%207%2C10%2011%2C14%2014%2C11%2010%2C7%20%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E");
+ background-color: #007CBA;
+ opacity: 0.50;  
+}
+
+.pop .btn-x:hover {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2214px%22%20height%3D%2214px%22%3E%3Cpolygon%20points%3D%2214%2C3%2011%2C0%207%2C4%203%2C0%200%2C3%204%2C7%200%2C11%203%2C14%207%2C10%2011%2C14%2014%2C11%2010%2C7%20%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E");
+  background-color: #007CBA;
+  opacity: 1;  
+ }
