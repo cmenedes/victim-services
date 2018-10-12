@@ -11,6 +11,8 @@ span.srch-lbl-sm {
 
 .clps h3 {
   text-align: center;
+  border: 1px solid;
+  border-radius: 5px;
 }
 
 .facility a.btn.phone {
@@ -103,4 +105,51 @@ span.srch-lbl-sm {
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2214px%22%20height%3D%2214px%22%3E%3Cpolygon%20points%3D%2214%2C3%2011%2C0%207%2C4%203%2C0%200%2C3%204%2C7%200%2C11%203%2C14%207%2C10%2011%2C14%2014%2C11%2010%2C7%20%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E");
   background-color: #007CBA;
   opacity: 1;  
+ }
+
+ a.filter-info {
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  float: right;
+  color: rgb(0,124,186);
+  border: 3px solid rgb(0,124,186);
+  border-radius: 50%;
+  font-size: 80%;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 2px;
+  line-height: 130%;
+  cursor: pointer;
+
+ }
+ .filter-info {
+  display: none;
+  line-height: 130%;
+  font-weight: normal;
+ }
+
+ .chc-chc {
+   font-weight: bold;
+ }
+
+ .chc-chc label {
+   line-height: 150%;
+ }
+
+ .clps div.content {
+   padding: 1em 2em;
+   background-color: #CCE1E6;
+ }
+
+ .tabs .container .tab.active {
+  background-color: #B3DBE7;
+ }
+
+ .chc {
+  border: 1px solid;
+  border-radius: 5px;
  }

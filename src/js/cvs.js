@@ -1,3 +1,42 @@
+nyc.ol.Filters.prototype.addFilter = function(choices) {
+  var target = $('<div class="competency"></div>');
+  this.append(target);
+  const choice = new nyc.Choice({
+    target: $('<div class="competency-choices"></div>'),
+    choices: choices
+  })
+  const collapsible = new nyc.Collapsible({
+    target: target,
+    title: 'Cultural competencies',
+    content: choice.getContainer()
+  })
+  choice.on('change', $.proxy(this.filter, this))
+  this.choiceControls.push(choice)
+};
+
+var readyFn = nyc.ol.FinderApp.prototype.ready;
+
+nyc.ol.FinderApp.prototype.ready = function(features) {
+  readyFn.call(this, features);
+  var choices = [];
+  for (var comp in finderDecorations.culturalCompetencies) {
+    if (comp.trim()) {
+      choices.push({
+        name: 'CULTURAL_COMPETENCIES_SPECIALIZATIONS',
+        values: [comp],
+        label: comp,
+        checked: false
+      });
+    }
+  }
+  choices.sort(function(a, b) {
+    if (a.label < b.label) return -1;
+    if (a.label > b.label) return 1;
+    return 0;
+  });
+
+  this.filters.addFilter(choices)
+};
 
 new nyc.ol.FinderApp({
   title: '<span class="screen-reader-only">NYC Criminal Justice</span>Victim Services Finder',
@@ -13,12 +52,31 @@ new nyc.ol.FinderApp({
   facilityStyle: style,
   filterChoiceOptions: [
     {
+      title: 'Language',
+      choices: [
+        {name: 'SPANISH', values: ['1'], label: 'Spanish'},
+        {name: 'ARABIC', values: ['1'], label: 'Arabic'},
+        {name: 'BENGALI', values: ['1' ], label: 'Bengali'},
+        {name: 'CHINESE', values: ['1'], label: 'Chinese'},
+        {name: 'FRENCH', values: ['1'], label: 'French' },
+        {name: 'HAITIAN-CREOLE', values:['1'], label: 'Haitian-Creole'},
+        {name: 'ITALIAN', values: ['1'], label: 'Italian'},
+        {name: 'KOREAN', values: ['1'], label: 'Korean'},
+        {name: 'POLISH', values: ['1'], label: 'Polish'},
+        {name: 'RUSSIAN', values: ['1'], label: 'Russian'},
+        {name: 'URDU', values: ['1'], label: 'Urdu'},
+        {name: 'YIDDISH', values: ['1'], label: 'Yiddish'},
+        {name: 'other_languages', values: ['1'], label: 'Other'}
+
+      ]
+    },
+    {
       title: 'Age Group',
       choices: [
-        {name: 'age_group', values: ['1000','1001','1010','1011','1100','1101','1110','1111'], label: 'Under 5 years old', checked: true},
-        {name: 'age_group', values: ['0100','0101','0110','0111','1100','1101','1110','1111'], label: '5 to 24 years old', checked: true},
-        {name: 'age_group', values: ['0010','0011','0110','0111','1010','1011','1110','1111' ], label: '25 to 60 years old', checked: true},
-        {name: 'age_group', values: ['0001','0011','0101','0111','1001','1011','1101','1111'], label: '60 years old and older', checked: true},
+        {name: 'AGE_0-5', values: ['1'], label: 'Under 5 years old'},
+        {name: 'AGE_5-24', values: ['1'], label: '5 to 24 years old'},
+        {name: 'AGE_25-60', values: ['1'], label: '25 to 60 years old'},
+        {name: 'AGE_60+', values: ['1'], label: '60 years old and older'}
 
       ]
     }
@@ -27,33 +85,28 @@ new nyc.ol.FinderApp({
       title: 'Support for a victim of',
       choices: [
         {
-          name: 'crime_types',
-          values: ['10000','10001','10010','10011','10100','10101','10110','10111','11000','11001','11010','11011','11100','11101','11110','11111'],
-          label: 'Intimate partner violence <a class="filter-info">?</a><div class="filter-info">Physical, sexual, psychological, or economic abuse that occurs between a former husband/wife, boyfriend/girlfriend, child\'s mother/father or a partner that someone lives with or used to live with</div>',
-          checked: true
+          name: 'INTIMATE_PARTNER_VIOLENCE',
+          values: ['1'],
+          label: 'Intimate partner violence <a class="filter-info" onClick="$(this).next().slideToggle();">?</a><div class="filter-info">Physical, sexual, psychological, or economic abuse that occurs between a former husband/wife, boyfriend/girlfriend, child\'s mother/father or a partner that someone lives with or used to live with</div>'
         }, {
-          name: 'crime_types',
-          values: ['11000','11001','11010','11011','11100','11101','11110','11111','01000','01001','01010','01011','01100','01101','01110','01111'],
-          label: 'Family violence <a class="filter-info">?</a><div class="filter-info">Physical, sexual, psychological, or economic abuse that occurs between family members</div>',
-          checked: true
+          name: 'FAMILY_VIOLENCE',
+          values: ['1'],
+          label: 'Family violence <a class="filter-info" onClick="$(this).next().slideToggle();">?</a><div class="filter-info">Physical, sexual, psychological, or economic abuse that occurs between family members</div>'
         }, {
-          name: 'crime_types',
-          values: ['00100','00101','00110','00111','01100','01101','01110','01111','10100','10101','10110','10111','11100','11101','11110','11111'],
-          label: 'Sexual assault',
-          checked: true
+          name: 'SEXUAL_ASSAULT',
+          values: ['1'],
+          label: 'Sexual assault'
         }, {
-          name: 'crime_types',
-          values: ['00010','00011','00110','00111','01010','01011','01110','01111','10010','10011','10110','10111','11010','11011','11110','11111'],
-          label: 'Violent crime',
-          checked: true
+          name: 'VIOLENT_CRIME',
+          values: ['1'],
+          label: 'Violent crime'
         }, {
-          name: 'crime_types',
-          values: ['00001','00011','00111','01011','01111','10011','10111','11011','11111','00101','01001','01101','10001','10101','11001','11101'],
-          label: 'Property/financial crime',
-          checked: true
+          name: 'PROPERTY/FINANCIAL_CRIMES',
+          values: ['1'],
+          label: 'Property/financial crime'
         }
       ]
-    }
+    } //"$(this).next().slideToggle())"
   ],
   facilitySearch: {displayField: 'search_label', nameField: 'ORGANIZATION_NAME'},
   decorations: finderDecorations,

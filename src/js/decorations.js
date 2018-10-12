@@ -35,19 +35,21 @@ var finderDecorations = {
     finderDecorations.countByLocation[locationKey] = count + 1;
     this.locationKey = locationKey;
     this.locationIdx = count;
+    this.__prop__=this.getProperties()
     this.set(
       'search_label',
       '<span class="srch-lbl-lg">' + this.get('ORGANIZATION_NAME') + '</span><br>' +
       '<span class="srch-lbl-sm">' + this.get('LOCATION_NAME') + '<span>'
     );
     this.set(
-      'age_group',
-      (this.get('AGE_0-5') || '0') + (this.get('AGE_5-24') || '0') + (this.get('AGE_25-60') || '0') + (this.get('AGE_60+') || '0')
+      'other_languages',
+      this.get('OTHER_LANGUAGE') !== '' ? '1' : '' 
     );
     this.set(
-      'crime_types',
-      (this.get('INTIMATE_PARTNER_VIOLENCE') || '0') + (this.get('FAMILY_VIOLENCE') || '0') + (this.get('SEXUAL_ASSAULT') || '0') + (this.get('VIOLENT_CRIME') || '0') + (this.get('PROPERTY/FINANCIAL_CRIMES') || '0') 
+      'fjc',
+      this.get('LOCATION_NAME').toLowerCase().indexOf('family justice center') > -1 ? '1' : ''
     );
+    finderDecorations.culturalCompetencies[this.get('CULTURAL_COMPETENCIES_SPECIALIZATIONS')] = true;
   },
   getCountAtLocation: function(){
     return finderDecorations.countByLocation[this.locationKey];
@@ -56,7 +58,7 @@ var finderDecorations = {
     return this.get('ADDRESS_1');
   },
   getBorough: function(){
-    return this.get('BOROUGH')
+    return this.get('BOROUGH');
   },
   getCityStateZip: function(){
     return this.get('ADDRESS_2');
@@ -65,16 +67,16 @@ var finderDecorations = {
     return this.get('ORGANIZATION_NAME');
   },
   getPhone: function(){
-    return this.get('PHONE')
+    return this.get('PHONE');
   },
   getWebsite: function(){
-    return this.get('WEBSITE')
+    return this.get('WEBSITE');
   },
   getAccessible: function(){
-    return this.get('WHEELCHAIR_ACCESS')
+    return this.get('WHEELCHAIR_ACCESS');
   },
   cssClass: function() {
-    return this.get('TYPE')
+    return this.get('fjc') ? 'fjc' : '';
   },
   locationHtml: function(){
     var div = $('<div class="location notranslate" translate="no"></div>');
@@ -174,3 +176,4 @@ var finderDecorations = {
 };
 
 finderDecorations.countByLocation = {};
+finderDecorations.culturalCompetencies = {};
