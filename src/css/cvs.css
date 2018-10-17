@@ -211,19 +211,19 @@ ul {
   white-space: normal;
   height: auto;
   margin-bottom: 5px;
-  padding: 5px 30px;
+  padding: 8px 30px;
 }
 .phone-dia .dia {
   width: 400px;
   margin-left: -208px;
-  margin-top: -134px;
+  margin-top: -140px;
 }
 
 @media only screen and (max-width : 499px) {
   .phone-dia .dia {
     width: 90%;
     height: auto;
-    max-height: 275px;
+    max-height: 300px;
     padding: 8px;
     margin-left: calc(-45% - 8px);
   }
@@ -232,7 +232,7 @@ ul {
   .phone-dia .dia {
     width: 90%;
     height: auto;
-    max-height: 275px;
+    max-height: 290px;
     padding: 8px;
     margin-left: calc(-45% - 8px);
   }
