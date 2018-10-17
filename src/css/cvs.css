@@ -161,85 +161,79 @@ span.srch-lbl-sm {
  .chc {
   border: 1px solid;
   border-radius: 5px;
- }
-
-.splash a.btn-yes {
-  width: 100%;
-  height: 43px;
-  display: block;
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20height%3D%221792%22%20width%3D%221792%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M1600%201240q0%2027-10%2070.5t-21%2068.5q-21%2050-122%20106-94%2051-186%2051-27%200-52.5-3.5t-57.5-12.5-47.5-14.5-55.5-20.5-49-18q-98-35-175-83-128-79-264.5-215.5t-215.5-264.5q-48-77-83-175-3-9-18-49t-20.5-55.5-14.5-47.5-12.5-57.5-3.5-52.5q0-92%2051-186%2056-101%20106-122%2025-11%2068.5-21t70.5-10q14%200%2021%203%2018%206%2053%2076%2011%2019%2030%2054t35%2063.5%2031%2053.5q3%204%2017.5%2025t21.5%2035.5%207%2028.5q0%2020-28.5%2050t-62%2055-62%2053-28.5%2046q0%209%205%2022.5t8.5%2020.5%2014%2024%2011.5%2019q76%20137%20174%20235t235%20174q2%201%2019%2011.5t24%2014%2020.5%208.5%2022.5%205q18%200%2046-28.5t53-62%2055-62%2050-28.5q14%200%2028.5%207t35.5%2021.5%2025%2017.5q25%2015%2053.5%2031t63.5%2035%2054%2030q70%2035%2076%2053%203%207%203%2021z%22%20fill%3D%22#007CBA%22%2F%3E%3C%2Fsvg%3E");
-  background-position: 5px 10px;
-  background-size: 28px;
 }
-
-.splash a.btn-no {
-   width: 150px;
-   display: block;
-}
-
-.fnd .splash .dia {
-  background-color: #007CBA;
-}
-
 .detail .name, .services li, .languages li {
   text-transform: capitalize;
 }
-.dia-msg h1 {
-  font-size: 24px;
-  margin: -10px 0 0 0;
-}
-
 ul {
   padding-inline-start: 25px;
   margin-block-start: 3px;
   margin-bottom: 5px;
 }
-
 .detail .name {
   padding-bottom: 15px;
 }
-
-#phone-numbers a {
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20height%3D%221792%22%20width%3D%221792%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M1600%201240q0%2027-10%2070.5t-21%2068.5q-21%2050-122%20106-94%2051-186%2051-27%200-52.5-3.5t-57.5-12.5-47.5-14.5-55.5-20.5-49-18q-98-35-175-83-128-79-264.5-215.5t-215.5-264.5q-48-77-83-175-3-9-18-49t-20.5-55.5-14.5-47.5-12.5-57.5-3.5-52.5q0-92%2051-186%2056-101%20106-122%2025-11%2068.5-21t70.5-10q14%200%2021%203%2018%206%2053%2076%2011%2019%2030%2054t35%2063.5%2031%2053.5q3%204%2017.5%2025t21.5%2035.5%207%2028.5q0%2020-28.5%2050t-62%2055-62%2053-28.5%2046q0%209%205%2022.5t8.5%2020.5%2014%2024%2011.5%2019q76%20137%20174%20235t235%20174q2%201%2019%2011.5t24%2014%2020.5%208.5%2022.5%205q18%200%2046-28.5t53-62%2055-62%2050-28.5q14%200%2028.5%207t35.5%2021.5%2025%2017.5q25%2015%2053.5%2031t63.5%2035%2054%2030q70%2035%2076%2053%203%207%203%2021z%22%20fill%3D%22#007CBA%22%2F%3E%3C%2Fsvg%3E");
-  display: block;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-bottom: 5px;
-  /* padding-bottom: 10%;
-  padding-top: 5%; */
-  margin-bottom: 10px;
-  width: calc(100% - 60px);
-  text-align: center;
-  height: auto;
-}
-
 .btn {
   border: 1px solid black;
 }
-
 .tabs .btns button.btn {
   border: 1px ridge black;
   margin-top: -.75px;
   margin-left: 1px;
 }
 
-.dia-container .dia {
+
+
+
+.fnd .splash .dia, .phone-dia .dia {
   background-color: #007CBA;
-  margin: auto;
-  width: 500px;
-  height: 300px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  max-width: calc(100% - 50px);
-  max-height: calc(100% - 50px); 
-/*   padding: 10px 20px 0px 20px; */
-  overflow: hidden;
 }
-
-.phone-dia {
+.fnd .splash .dia-msg button, #phone-content a {
   display: block;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20height%3D%221792%22%20width%3D%221792%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M1600%201240q0%2027-10%2070.5t-21%2068.5q-21%2050-122%20106-94%2051-186%2051-27%200-52.5-3.5t-57.5-12.5-47.5-14.5-55.5-20.5-49-18q-98-35-175-83-128-79-264.5-215.5t-215.5-264.5q-48-77-83-175-3-9-18-49t-20.5-55.5-14.5-47.5-12.5-57.5-3.5-52.5q0-92%2051-186%2056-101%20106-122%2025-11%2068.5-21t70.5-10q14%200%2021%203%2018%206%2053%2076%2011%2019%2030%2054t35%2063.5%2031%2053.5q3%204%2017.5%2025t21.5%2035.5%207%2028.5q0%2020-28.5%2050t-62%2055-62%2053-28.5%2046q0%209%205%2022.5t8.5%2020.5%2014%2024%2011.5%2019q76%20137%20174%20235t235%20174q2%201%2019%2011.5t24%2014%2020.5%208.5%2022.5%205q18%200%2046-28.5t53-62%2055-62%2050-28.5q14%200%2028.5%207t35.5%2021.5%2025%2017.5q25%2015%2053.5%2031t63.5%2035%2054%2030q70%2035%2076%2053%203%207%203%2021z%22%20fill%3D%22#007CBA%22%2F%3E%3C%2Fsvg%3E");
+  background-position: 5px 50%;
+  background-size: 28px;
+  color: #000;
+  text-align: center;
+}
+.fnd .splash .dia-msg button {
+  width: 100%;
+  height: 43px;
+}
+.fnd .splash .dia a.btn-ok {
+  width: 150px;
+}
+.dia-msg h1 {
+  font-size: 24px;
+  margin: -10px 0 0 0;
+}
+#phone-content a {
+  white-space: normal;
+  height: auto;
+  margin-bottom: 5px;
+  padding: 5px 30px;
+}
+.phone-dia .dia {
+  width: 400px;
+  margin-left: -208px;
+  margin-top: -134px;
 }
 
+@media only screen and (max-width : 499px) {
+  .phone-dia .dia {
+    width: 90%;
+    height: auto;
+    max-height: 275px;
+    padding: 8px;
+    margin-left: calc(-45% - 8px);
+  }
+}
+@media only screen and (max-height : 400px) {
+  .phone-dia .dia {
+    width: 90%;
+    height: auto;
+    max-height: 275px;
+    padding: 8px;
+    margin-left: calc(-45% - 8px);
+  }
+}

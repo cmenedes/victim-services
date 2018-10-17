@@ -43,45 +43,14 @@ nyc.ol.FinderApp.prototype.ready = function(features) {
     });
   });
   $('#filters').append(reset);
-  
 };
-nyc.ol.FinderApp.prototype.showSplash = function() {
-  var options = {
-    message: '<h1>Computer Safety Notice</h1><p>Be aware that abusers may be able to track your visit to this web page.</p>',
-    buttonText: ['If you feel that you are in danger<br>click here to call for help', 'Continue to Map']
-  };
-
-
-
-  new nyc.Dialog('splash').yesNo(options).then(function(showMap) {
-
-    if(!showMap){
-      console.log("showing map");
-      var input = this.locationMgr.zoomSearch.input;
-      $('#tabs').attr('aria-hidden', false);
-      input.focus();
-    }
-    else{
-      //show call options     
-      //new nyc.Dialog('splash').yesNo(options);
-      var dialog = new nyc.Dialog('phone-dia').ok({
-        message: $('#phone-numbers'),
-        buttonText: ['Close']
-      }).then(function(result) {
-        console.info(result);
-      });
-      $('#phone-numbers a.call').click(function() {
-        dialog.hide();
-      });  
-
-    }
-
-  });
-
-}
 
 new nyc.ol.FinderApp({
   title: '<span class="screen-reader-only">NYC Criminal Justice</span>Victim Services Finder',
+  splashOptions: {
+    message: $('#splash-content'),
+    buttonText: ['Continue to map']
+  },
   geoclientUrl: 'https://maps.nyc.gov/geoclient/v1/search.json?app_key=74DF5DB1D7320A9A2&app_id=nyc-lib-example',
   facilityTabTitle: 'Locations',
   facilityUrl: 'data/facility.csv',
@@ -149,4 +118,18 @@ new nyc.ol.FinderApp({
   facilitySearch: {displayField: 'search_label', nameField: 'ORGANIZATION_NAME'},
   decorations: finderDecorations,
   directionsUrl: 'https://maps.googleapis.com/maps/api/js?client=gme-newyorkcitydepartment&channel=pka&sensor=false&libraries=visualization'
+});
+
+var phoneDialog = new nyc.Dialog('phone-dia');
+
+$('#phone-numbers a.call').click(function() {
+  phoneDialog.hide();
+});  
+
+$('#splash-content button').click(function() {
+  $('.dia-container.splash').fadeOut();
+  phoneDialog.ok({
+    message: $('#phone-content'),
+    buttonText: ['Close']
+  })
 });
