@@ -49,6 +49,7 @@ var finderDecorations = {
       'fjc',
       this.get('LOCATION_NAME').toLowerCase().indexOf('family justice center') > -1 ? '1' : ''
     );
+
     finderDecorations.culturalCompetencies[this.get('CULTURAL_COMPETENCIES_SPECIALIZATIONS')] = true;
   },
   getCountAtLocation: function(){

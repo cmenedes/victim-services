@@ -1,6 +1,6 @@
 nyc.ol.Filters.prototype.addFilter = function(choices) {
   var target = $('<div class="competency"></div>');
-  this.append(target);
+  target.insertAfter($('.filter-1'));
   const choice = new nyc.Choice({
     target: $('<div class="competency-choices"></div>'),
     choices: choices
@@ -10,8 +10,8 @@ nyc.ol.Filters.prototype.addFilter = function(choices) {
     title: 'Cultural competencies',
     content: choice.getContainer()
   })
-  choice.on('change', $.proxy(this.filter, this))
-  this.choiceControls.push(choice)
+  choice.on('change', $.proxy(this.filter, this));
+  this.choiceControls.push(choice);
 };
 
 var readyFn = nyc.ol.FinderApp.prototype.ready;
@@ -24,8 +24,7 @@ nyc.ol.FinderApp.prototype.ready = function(features) {
       choices.push({
         name: 'CULTURAL_COMPETENCIES_SPECIALIZATIONS',
         values: [comp],
-        label: comp,
-        checked: false
+        label: comp
       });
     }
   }
@@ -35,12 +34,54 @@ nyc.ol.FinderApp.prototype.ready = function(features) {
     return 0;
   });
 
-  this.filters.addFilter(choices)
+  this.filters.addFilter(choices);
+  $('.clps h3').trigger('click');
+  var reset = $('<button class="btn rad-all reset">Reset</button>').click(function(){
+    $.each(finderApp.filters.choiceControls, function() {
+      this.val([]);
+      this.trigger('change');
+    });
+  });
+  $('#filters').append(reset);
+  
 };
+nyc.ol.FinderApp.prototype.showSplash = function() {
+  var options = {
+    message: '<h1>Computer Safety Notice</h1><p>Be aware that abusers may be able to track your visit to this web page.</p>',
+    buttonText: ['If you feel that you are in danger<br>click here to call for help', 'Continue to Map']
+  };
+
+
+
+  new nyc.Dialog('splash').yesNo(options).then(function(showMap) {
+
+    if(!showMap){
+      console.log("showing map");
+      var input = this.locationMgr.zoomSearch.input;
+      $('#tabs').attr('aria-hidden', false);
+      input.focus();
+    }
+    else{
+      //show call options     
+      //new nyc.Dialog('splash').yesNo(options);
+      var dialog = new nyc.Dialog('phone-dia').ok({
+        message: $('#phone-numbers'),
+        buttonText: ['Close']
+      }).then(function(result) {
+        console.info(result);
+      });
+      $('#phone-numbers a.call').click(function() {
+        dialog.hide();
+      });  
+
+    }
+
+  });
+
+}
 
 new nyc.ol.FinderApp({
   title: '<span class="screen-reader-only">NYC Criminal Justice</span>Victim Services Finder',
-  splashOptions: {message: '<h1>Computer Safety Notice</h1><p>Be aware that abusers may be able to track your visit to this web page.</p>'},
   geoclientUrl: 'https://maps.nyc.gov/geoclient/v1/search.json?app_key=74DF5DB1D7320A9A2&app_id=nyc-lib-example',
   facilityTabTitle: 'Locations',
   facilityUrl: 'data/facility.csv',
@@ -52,35 +93,14 @@ new nyc.ol.FinderApp({
   facilityStyle: style,
   filterChoiceOptions: [
     {
-      title: 'Language',
-      choices: [
-        {name: 'SPANISH', values: ['1'], label: 'Spanish'},
-        {name: 'ARABIC', values: ['1'], label: 'Arabic'},
-        {name: 'BENGALI', values: ['1' ], label: 'Bengali'},
-        {name: 'CHINESE', values: ['1'], label: 'Chinese'},
-        {name: 'FRENCH', values: ['1'], label: 'French' },
-        {name: 'HAITIAN-CREOLE', values:['1'], label: 'Haitian-Creole'},
-        {name: 'ITALIAN', values: ['1'], label: 'Italian'},
-        {name: 'KOREAN', values: ['1'], label: 'Korean'},
-        {name: 'POLISH', values: ['1'], label: 'Polish'},
-        {name: 'RUSSIAN', values: ['1'], label: 'Russian'},
-        {name: 'URDU', values: ['1'], label: 'Urdu'},
-        {name: 'YIDDISH', values: ['1'], label: 'Yiddish'},
-        {name: 'other_languages', values: ['1'], label: 'Other'}
-
-      ]
-    },
-    {
       title: 'Age Group',
       choices: [
         {name: 'AGE_0-5', values: ['1'], label: 'Under 5 years old'},
         {name: 'AGE_5-24', values: ['1'], label: '5 to 24 years old'},
         {name: 'AGE_25-60', values: ['1'], label: '25 to 60 years old'},
         {name: 'AGE_60+', values: ['1'], label: '60 years old and older'}
-
       ]
-    }
-    ,
+    },
     {
       title: 'Support for a victim of',
       choices: [
@@ -106,7 +126,25 @@ new nyc.ol.FinderApp({
           label: 'Property/financial crime'
         }
       ]
-    } //"$(this).next().slideToggle())"
+    },
+    {
+      title: 'Language',
+      choices: [
+        {name: 'SPANISH', values: ['1'], label: 'Spanish'},
+        {name: 'ARABIC', values: ['1'], label: 'Arabic'},
+        {name: 'BENGALI', values: ['1' ], label: 'Bengali'},
+        {name: 'CHINESE', values: ['1'], label: 'Chinese'},
+        {name: 'FRENCH', values: ['1'], label: 'French' },
+        {name: 'HAITIAN-CREOLE', values:['1'], label: 'Haitian-Creole'},
+        {name: 'ITALIAN', values: ['1'], label: 'Italian'},
+        {name: 'KOREAN', values: ['1'], label: 'Korean'},
+        {name: 'POLISH', values: ['1'], label: 'Polish'},
+        {name: 'RUSSIAN', values: ['1'], label: 'Russian'},
+        {name: 'URDU', values: ['1'], label: 'Urdu'},
+        {name: 'YIDDISH', values: ['1'], label: 'Yiddish'},
+        {name: 'other_languages', values: ['1'], label: 'Other'}
+      ]
+    },    
   ],
   facilitySearch: {displayField: 'search_label', nameField: 'ORGANIZATION_NAME'},
   decorations: finderDecorations,
