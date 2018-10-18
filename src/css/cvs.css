@@ -135,13 +135,13 @@ a.btn.rad-all.web {
 
 
 
-.clps h3::before {
+.clps button:before {
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2214px%22%20height%3D%2214px%22%3E%3Cpolygon%20points%3D%222.051%2C10.596%207%2C5.646%2011.95%2C10.596%2014.07%2C8.475%207%2C1.404%20-0.071%2C8.475%20%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E");
   background-color: #007CBA;
   opacity: 0.50; 
 }   
 
-.clps h3:hover:before {
+.clps button:hover:before {
   background-color: #007CBA;
   opacity: 1;
 }
