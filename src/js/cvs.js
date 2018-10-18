@@ -121,10 +121,13 @@ new nyc.ol.FinderApp({
 });
 
 var phoneDialog = new nyc.Dialog('phone-dia');
+var infoDialog = new nyc.Dialog('info-dia');
 
-$('#phone-numbers a.call').click(function() {
-  phoneDialog.hide();
-});  
+
+
+// $('#phone-numbers a.call').click(function() {
+//   phoneDialog.hide();
+// });  
 
 $('#splash-content button').click(function() {
   $('.dia-container.splash').fadeOut();
@@ -133,3 +136,20 @@ $('#splash-content button').click(function() {
     buttonText: ['Close']
   })
 });
+
+$('#phn a.btn-phn').click(function() {
+  $('.dia-container.splash').fadeOut();
+  phoneDialog.ok({
+    message: $('#phone-content'),
+    buttonText: ['Close']
+  })
+});
+
+$('#info a.btn-info').click(function() {
+  $('.dia-container.splash').fadeOut();
+  infoDialog.ok({
+    message: $('#info-content'),
+    buttonText: ['Close']
+  })
+});
+// $('#map').append($('<div class="phn" role="region" aria-label="For emergencies"><a class="btn-phn btn-sq rad-all" role="button" href="#" title="Emergency Numbers..." aria-pressed="false" aria-controls="share-0"><span class="screen-reader-only">Emergency numbers...</span></a><div class="btns" aria-expanded="false" aria-collapsed="true" id="share-0" style="display: none;"><a class="btn-sq rad-all facebook" role="button" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:8080/victim-services/src/index.html#" target="_blank" rel="noopener noreferrer" title="Facebook"><span class="screen-reader-only">Facebook</span></a><a class="btn-sq rad-all twitter" role="button" href="https://twitter.com/intent/tweet?text=http://localhost:8080/victim-services/src/index.html# @nycgov&amp;source=webclient" target="_blank" rel="noopener noreferrer" title="Twitter"><span class="screen-reader-only">Twitter</span></a><a class="btn-sq rad-all google" role="button" href="https://plus.google.com/share?url=http://localhost:8080/victim-services/src/index.html#" target="_blank" rel="noopener noreferrer" title="Google+"><span class="screen-reader-only">Google+</span></a><a class="btn-sq rad-all linkedin" role="button" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://localhost:8080/victim-services/src/index.html#" target="_blank" rel="noopener noreferrer" title="LinkedIn"><span class="screen-reader-only">LinkedIn</span></a><a class="btn-sq rad-all tumblr" role="button" href="http://www.tumblr.com/share/link?url=http://localhost:8080/victim-services/src/index.html#&amp;name=NYC Pre-K Finder&amp;description=via%20NYC.gov" target="_blank" rel="noopener noreferrer" title="Tumblr"><span class="screen-reader-only">Tumblr</span></a><a class="btn-sq rad-all email" role="button" href="mailto:?subject=NYC Pre-K Finder&amp;body=Locate Pre-K schools%0A%0Ahttp://localhost:8080/victim-services/src/index.html#" title="email"><span class="screen-reader-only">Email</span></a></div></div>'));

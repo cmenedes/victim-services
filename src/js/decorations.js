@@ -76,6 +76,9 @@ var finderDecorations = {
   getAccessible: function(){
     return this.get('WHEELCHAIR_ACCESS');
   },
+  getFJC: function(){
+    return this.get('fjc');
+  },
   cssClass: function() {
     return this.get('fjc') ? 'fjc' : '';
   },
@@ -84,9 +87,14 @@ var finderDecorations = {
     return div.html(this.get('LOCATION_NAME'));
   },
   nameHtml: function() {
-    var result = '<h3 class="name notranslate"></h3>';
-    if(this.getAccessible())
-      result = '<h3 class="name notranslate accessible"></h3>';
+    var classResult = "name no translate";
+    if(this.getAccessible()){
+      classResult += " accessible";  
+    }
+    if(this.getFJC()){
+      classResult += " fjc";  
+    }
+    var result = '<h3 class=' + "'" + classResult + "'" +'></h3>';
     return $(result)
       .html(this.getName())
       .add(this.locationHtml());
