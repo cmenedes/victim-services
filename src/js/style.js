@@ -36,7 +36,6 @@ const style = (feature, resolution) => {
         text: new Text({
           fill: new Fill({color: '#fff'}),
           font: fontSize + 'px sans-serif',
-          // font: '20px sans-serif',
           text: count + '',
           offsetX: 5 * size / 33,
           offsetY: -4 * size / 33,
