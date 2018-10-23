@@ -1,4 +1,8 @@
-var finderDecorations = {
+/**
+ * @module victimservices/decorations
+ */
+
+const decorations = {
   services: [
     'CASE_MANAGEMENT',
     'CRISIS_INTERVENTION',
@@ -29,160 +33,159 @@ var finderDecorations = {
     'URDU',
     'YIDDISH'
   ],
-  extendFeature: function(){
-    var locationKey = this.get('X') + '@' + this.get('Y');
-    var count = finderDecorations.countByLocation[locationKey] || 0;
-    finderDecorations.countByLocation[locationKey] = count + 1;
-    this.locationKey = locationKey;
-    this.locationIdx = count;
+  extendFeature() {
+    const locationKey = `${this.get('X')}@${this.get('Y')}`
+    const count = decorations.countByLocation[locationKey] || 0
+    decorations.countByLocation[locationKey] = count + 1
+    this.locationKey = locationKey
     this.__prop__=this.getProperties()
     this.set(
       'search_label',
-      '<span class="srch-lbl-lg">' + this.get('ORGANIZATION_NAME') + '</span><br>' +
-      '<span class="srch-lbl-sm">' + this.get('LOCATION_NAME') + '<span>'
-    );
+      `<span class="srch-lbl-lg">${this.get('ORGANIZATION_NAME')}</span><br>
+      <span class="srch-lbl-sm">${this.get('LOCATION_NAME')}<span>`
+    )
     this.set(
       'other_languages',
       this.get('OTHER_LANGUAGE') !== '' ? '1' : '' 
-    );
+    )
     this.set(
       'fjc',
       this.get('LOCATION_NAME').toLowerCase().indexOf('family justice center') > -1 ? '1' : ''
-    );
+    )
 
-    finderDecorations.culturalCompetencies[this.get('CULTURAL_COMPETENCIES_SPECIALIZATIONS')] = true;
+    decorations.culturalCompetencies[this.get('CULTURAL_COMPETENCIES_SPECIALIZATIONS')] = true
   },
-  getCountAtLocation: function(){
-    return finderDecorations.countByLocation[this.locationKey];
+  getCountAtLocation() {
+    return decorations.countByLocation[this.locationKey]
   },
-  getAddress1: function(){
-    return this.get('ADDRESS_1');
+  getAddress1() {
+    return this.get('ADDRESS_1')
   },
-  getBorough: function(){
-    return this.get('BOROUGH');
+  getBorough() {
+    return this.get('BOROUGH')
   },
-  getCityStateZip: function(){
-    return this.get('ADDRESS_2');
+  getCityStateZip() {
+    return this.get('ADDRESS_2')
   },
-  getName: function(){
-    return this.get('ORGANIZATION_NAME');
+  getName() {
+    return this.get('ORGANIZATION_NAME')
   },
-  getPhone: function(){
-    return this.get('PHONE');
+  getPhone() {
+    return this.get('PHONE')
   },
-  getWebsite: function(){
-    return this.get('WEBSITE');
+  getWebsite() {
+    return this.get('WEBSITE')
   },
-  getAccessible: function(){
-    return this.get('WHEELCHAIR_ACCESS');
+  getAccessible() {
+    return this.get('WHEELCHAIR_ACCESS')
   },
-  getFJC: function(){
-    return this.get('fjc');
+  getFJC() {
+    return this.get('fjc')
   },
-  cssClass: function() {
-    return this.get('fjc') ? 'fjc' : '';
+  cssClass() {
+    return this.get('fjc') ? 'fjc' : ''
   },
-  locationHtml: function(){
-    var div = $('<div class="location notranslate" translate="no"></div>');
-    return div.html(this.get('LOCATION_NAME'));
+  locationHtml() {
+    const div = $('<div class="location notranslate fjc" translate="no"></div>')
+    return div.html(this.get('LOCATION_NAME'))
   },
-  nameHtml: function() {
-    var classResult = "name no translate";
+  nameHtml() {
+    let classResult = "name no translate"
     if(this.getAccessible()){
-      classResult += " accessible";  
+      classResult += " accessible" 
     }
     if(this.getFJC()){
-      classResult += " fjc";  
+      classResult += " fjc"
     }
-    var result = '<h3 class=' + "'" + classResult + "'" +'></h3>';
-    return $(result)
+    return $(`<h3 class="${classResult}"></h3>`)
       .html(this.getName())
-      .add(this.locationHtml());
+      .add(this.locationHtml())
   },
-  phoneHtml: function(button){
-    var phone = this.get('PHONE').split(' ')[0].trim();
+  phoneHtml(button) {
+    const phone = this.get('PHONE').split(' ')[0].trim()
     if (phone){
-      var result;
-      var ext = this.get('EXT');
-      var readable = ext ? ' ext. ' + ext : '';
-      ext = ext.split(' ')[0];
-      ext = ext ? ',' + ext : '';
+      let result
+      let ext = this.get('EXT')
+      const readable = ext ? ' ext. ' + ext : ''
+      ext = ext.split(' ')[0]
+      ext = ext ? ',' + ext : ''
       if (button){
         result = $('<a class="btn rad-all phone notranslate" translate="no" role="button"></a>')
-          .attr('href', 'tel:' + phone + ext);
+          .attr('href', `tel:${phone}${ext}`)
       }else{
-        result = $('<span></span>');
+        result = $('<span></span>')
       }
-      return result.html(phone + readable);
+      return result.html(phone + readable)
     }
   },
-  phoneButton: function(){
-    return this.phoneHtml(true);
+  phoneButton() {
+    return this.phoneHtml(true)
   },
-  detailsHtml: function(){
-    var div = $('<div></div>');
-    var phone = $('<div class="phone"><b>Phone:</b> </div>')
+  detailsHtml() {
+    const div = $('<div></div>')
+    const phone = $('<div class="phone"><b>Phone:</b> </div>')
     return div.append(this.hoursHtml())
       .append(phone.append(this.phoneHtml()))
       .append(this.eligibilityHtml())
       .append(this.servicesHtml())
       .append(this.languagesHtml())
-      .append(this.culturalHtml());
+      .append(this.culturalHtml())
   },
-  hoursHtml: function(){
-    var hrs = $('<div class="hours"></div>');
+  hoursHtml() {
+    const hrs = $('<div class="hours"></div>')
     hrs.append('<div class="name">Hours of operation:</div>')
-      .append('<div>' + this.get('MAIN_HOURS_OF_OPERATION') + '<div>');
-    var wkend = this.get('WEEKEND_HOURS_OF_OPERATION');
+      .append(`<div>${this.get('MAIN_HOURS_OF_OPERATION')}<div>`)
+    const wkend = this.get('WEEKEND_HOURS_OF_OPERATION')
     if (wkend){
-      hrs.append(' (' + wkend + ')');
+      hrs.append(` (${wkend})`)
     }
-    return hrs;
+    return hrs
   },
-  eligibilityHtml: function(){
-    var eligibility = this.get('ELIGIBILITY_CRITERIA');
+  eligibilityHtml() {
+    const eligibility = this.get('ELIGIBILITY_CRITERIA')
     if (eligibility){
       return $('<div class="eligibility"></div>')
         .append('<div class="name">Eligibility criteria:</div>')
-        .append(eligibility);
+        .append(eligibility)
     }
   },
-  servicesHtml: function(){
-    var div = $('<div class="services"><div class="name">Services offered:</div></div>');
-    return div.append(this.makeList(this.services, this.get('OTHER_SERVICE')));
+  servicesHtml() {
+    const div = $('<div class="services"><div class="name">Services offered:</div></div>')
+    return div.append(this.makeList(this.services, this.get('OTHER_SERVICE')))
   },
-  languagesHtml: function(){
-    var ul = this.makeList(this.languages, this.get('OTHER_LANGUAGE'));
+  languagesHtml() {
+    const ul = this.makeList(this.languages, this.get('OTHER_LANGUAGE'))
     if (ul.children().length){
-      var div = $('<div class="languages"><div class="name">Languages offered:</div></div>');
+      const div = $('<div class="languages"><div class="name">Languages offered:</div></div>')
       if (ul.children().length == this.languages.length && this.get('INTERPRETATION_SERVICE_OFFERED')){
-        return div.append('<div>Interpretation service offered</div>');
+        return div.append('<div>Interpretation service offered</div>')
       }else{
-        return div.append(ul);
+        return div.append(ul)
       }
     }
   },
-  culturalHtml: function(){
-    var cultural = this.get('CULTURAL_COMPETENCIES_SPECIALIZATIONS');
+  culturalHtml() {
+    const cultural = this.get('CULTURAL_COMPETENCIES_SPECIALIZATIONS')
     if (cultural){
       return $('<div class="cultural"><div class="name">Cultural competency specializations:</div></div>')
-        .append('<div>' + cultural + '</div>');
+        .append(`<div>${cultural}</div>`)
     }
   },
-  makeList: function(list, other){
-    var me = this, ul = $('<ul></ul>');
-    $.each(list, function(){
-      if (me.get(this)){
-        var li = $('<li></li>').html(this.toLowerCase().replace(/_/g, ' ').replace(/-/g, ' '));
-        ul.append(li);
+  makeList(list, other) {
+    const ul = $('<ul></ul>')
+    list.forEach(item => {
+      if(this.get(item)){
+        const li = $('<li></li>').html(item.toLowerCase().replace(/_/g, ' ').replace(/-/g, ' '))
+        ul.append(li)
       }
-    });
+    })
     if (other){
-      ul.append('<li>' + other + '</li>');
+      ul.append(`<li>${other}</li>`)
     }
-    return ul;
-  }
-};
+    return ul
+  },
+  countByLocation: {},
+  culturalCompetencies: {}
+}
 
-finderDecorations.countByLocation = {};
-finderDecorations.culturalCompetencies = {};
+export default decorations
