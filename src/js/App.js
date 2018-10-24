@@ -51,6 +51,8 @@ class App extends FinderApp {
       })
     })
     $('#filters').append(reset)
+    $('#map').append($('#phn'))
+    $('#map').append($('#info'))
 
     this.dialogHandler()
   }

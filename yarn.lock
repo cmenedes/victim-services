@@ -4631,7 +4631,7 @@ nyc-build-helper@^0.0.23:
     webpack "^4.16.1"
     zip-dir "^1.0.2"
 
-nyc-lib@^1.1.89:
+nyc-lib@^1.1.93:
   version "1.1.93"
   resolved "https://registry.yarnpkg.com/nyc-lib/-/nyc-lib-1.1.93.tgz#6340a780cc04ea60f16215a9a2bbbf47cc0fbf99"
   dependencies:
