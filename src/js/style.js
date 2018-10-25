@@ -17,7 +17,8 @@ const style = (feature, resolution) => {
   if (zoom > 13) size = 24
   if (zoom > 15) size = 32
   if (zoom > 17) size = 40
-  const fjc = feature.get('fjc') ? '-fjc' : ''
+  let fjc = feature.get('fjc') ? '-fjc' : ''
+  fjc = ''
   
   const style = [new Style({
     image: new Icon({

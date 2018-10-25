@@ -1,6 +1,11 @@
 span.srch-lbl-sm {
   font-size: 80%;
 }
+
+.srch {
+  left: 39px;
+}
+
 .fnd #banner {
   background-color: var(--color-banner);
   color: #000;
@@ -59,22 +64,22 @@ a.btn.rad-all.call, button.btn.rad-all.call {
 
 #info {
   position: absolute;
-  left: 42px;
+  left: 44px;
   bottom: 5px;
   height: 35px;
   width: 33px;
   z-index: 1;
 }
 
- .btn-info {
+.btn-info {
   background-image: var(--info-icon-light);
 } 
 
 .shr {
   position: absolute;
-  bottom: 45px;
+  bottom: 46px;
   height: 35px;
-  width: 33px;
+  width: 35px;
 }
 .btn-shr {
   height: 35px;
@@ -84,21 +89,33 @@ a.btn.rad-all.call, button.btn.rad-all.call {
 
 .shr .btns {
   position: fixed;
-  left: 42px;
+  left: 43px;
 }
 .btn-shr, .shr .btns a {
   width: 35px;
   height: 35px;
+  margin: 0 4px 0 0;
 }
 
 #lng.button .btn-sq, #lng.button select {
   position: absolute;
-  left: 80px;
+  left: 82px;
   bottom: -37px;
   height: 35px;
-  width: 33px;
+  width: 35px;
   z-index: 1;
 }
+
+.btn-z-out {
+  left: 0;
+  top: 39px;
+}
+
+.btn-geo {
+  left: 0px;
+  top: 78px;
+}
+
 
 .clps button:before {
   background-color: var(--color-icons);
@@ -132,18 +149,28 @@ a.btn.rad-all.call, button.btn.rad-all.call {
 } */
 
 
-.pop .btn-x {
- background-image: var(--x-icon-light);
- background-color: var(--color-icons);
- opacity: 0.50;  
+.pop .btn-x, {
+  background-image: var(--x-icon-light);
+  background-color: var(--color-icons);
+  opacity: 0.50;  
 }
 
-.pop .btn-x:hover {
+.pop .btn-x:hover,  {
   background-image: var(--x-icon-light);
   background-color: var(--color-icons);
   opacity: 1;  
  }
 
+.btn-rnd {
+  background-color: var(--color-icons);
+  opacity: 0.50; 
+}
+
+.btn-rnd:hover {
+  background-color: var(--color-icons);
+  opacity: 1;  
+}
+ 
 a.filter-info {
   background-color: #fff;
   background-repeat: no-repeat;
