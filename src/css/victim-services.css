@@ -6,12 +6,17 @@ span.srch-lbl-sm {
   left: 39px;
 }
 
+.srch ul li:hover {
+  background-color: #004466;
+}
+
+.srch ul li:hover a span {
+  color: white;
+}
+
 .fnd #banner {
-  background-color: var(--color-banner);
-  color: #000;
-  background-image: url(../img/criminaljustice-logo.png);
-  background-size: 135px 24px;
-  padding-left: 142px;
+  background-size: 180px 25px;
+  padding-left: 187px;
 }
 
 .reset {
@@ -246,20 +251,15 @@ a.filter-info {
   background-color: var(--color-icons);
 }
 
-.fnd .splash .dia-msg button, #phone-content a {
+.fnd .splash .dia-msg button, #phone-content a, #info-content a {
   display: block;
   background-position: 5px 50%;
   background-size: 28px;
-  color: #000;
+  color: var(--color-dark);
   text-align: center;
 }
 
 #info-content a, #phone-content a {
-  display: block;
-  background-position: 5px 50%;
-  background-size: 28px;
-  color: #000;
-  text-align: center;
   white-space: normal;
   height: auto;
   margin-bottom: 5px;

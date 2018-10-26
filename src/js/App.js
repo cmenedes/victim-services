@@ -18,10 +18,10 @@ class App extends FinderApp {
    * @public
    * @constructor
    */  
-  constructor(options){
-    super(options)
-    this.filterChoiceOptions = options.filterChoiceOptions;
-  }
+  // constructor(options){
+  //   super(options)
+  //   this.filterChoiceOptions = options.filterChoiceOptions;
+  // }
 
   ready(features){
     super.ready(features)
@@ -43,7 +43,7 @@ class App extends FinderApp {
 
     this.filters.addFilter(choices)
 
-    $('.clps button').trigger('click')
+    $('#filters.tab.tab-2 .clps .btn').trigger('click')
     const reset = $('<button class="btn rad-all reset">Reset</button>').click(() => {
       finderApp.filters.choiceControls.forEach(ctl => {
         ctl.val([])
