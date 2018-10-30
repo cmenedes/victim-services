@@ -18,10 +18,6 @@ class App extends FinderApp {
    * @public
    * @constructor
    */  
-  // constructor(options){
-  //   super(options)
-  //   this.filterChoiceOptions = options.filterChoiceOptions;
-  // }
 
   ready(features){
     super.ready(features)
