@@ -42,7 +42,7 @@ const decorations = {
     this.set(
       'search_label',
       `<span class="srch-lbl-lg">${this.get('ORGANIZATION_NAME')}</span><br>
-      <span class="srch-lbl-sm">${this.get('LOCATION_NAME')}<span>`
+      <span class="srch-lbl-sm">${this.get('LOCATION_NAME')}</span>`
     )
     this.set(
       'other_languages',

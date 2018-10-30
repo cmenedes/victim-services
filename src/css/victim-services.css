@@ -10,10 +10,6 @@ span.srch-lbl-sm {
   background-color: #004466;
 }
 
-.srch ul li:hover a span {
-  color: white;
-}
-
 .fnd #banner {
   background-size: 180px 25px;
   padding-left: 187px;
