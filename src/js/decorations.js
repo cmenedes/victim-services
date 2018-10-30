@@ -90,16 +90,17 @@ const decorations = {
     return div.html(this.get('LOCATION_NAME'))
   },
   nameHtml() {
-    let classResult = "name no translate"
+    const html = $(`<h3 class="name notranslate">${this.getName()}</h3>`)
+    const location = this.locationHtml()
     if(this.getAccessible()){
-      classResult += " accessible" 
+      html.addClass('accessible')
+      location.append('<div class="screen-reader-only"> - this is a wheelchair accessible facility</div>')
     }
     if(this.getFJC()){
-      classResult += " fjc"
+      html.addClass('fjc')
     }
-    return $(`<h3 class="${classResult}"></h3>`)
-      .html(this.getName())
-      .add(this.locationHtml())
+    return html.add(location)
+      
   },
   phoneHtml(button) {
     const phone = this.get('PHONE').split(' ')[0].trim()
