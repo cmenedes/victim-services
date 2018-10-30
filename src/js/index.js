@@ -55,6 +55,24 @@ new App({
       ]
     },
     {
+      title: 'Services Offered',
+      choices: [
+        {name: 'CASE_MANAGEMENT', values: ['1'], label: 'Case Management'},
+        {name: 'CRISIS_INTERVENTION', values: ['1'], label: 'Crisis Intervention'},
+        {name: 'LEGAL_SERVICES', values: ['1' ], label: 'Legal Services'},
+        {name: 'SAFETY_PLANNING', values: ['1'], label: 'Safety Planning'},
+        {name: 'IMMIGRATION_SERVICES', values: ['1'], label: 'Immigration Services' },
+        {name: 'EMERGENCY_OR_TRANSITIONAL_SHELTER', values: ['1'], label: 'Emergency or Transitional Shelter'},
+        {name: 'PERMANENT_HOUSING', values: ['1'], label: 'Permanent Housing'},
+        {name: 'HEALTH_CARE', values: ['1'], label: 'Health Care'},
+        {name: 'MENTAL_HEALTH_COUNSELING', values: ['1'], label: 'Mental Health Counseling'},
+        {name: 'DRUG_ADDICTION_SCREENING_AND_TREATMENT', values: ['1'], label: 'Drug Addiction Screening and Treatment'},
+        {name: 'LANGUAGE_INTERPRETATION', values: ['1'], label: 'Language Interpretation'},
+        {name: 'JOB_TRAINING_AND_ECONOMIC_EMPOWERMENT', values: ['1'], label: 'Job Training and Economic Empowerment'},
+        {name: 'RESTORATIVE_JUSTICE', values: ['1'], label: 'Restorative Justice'}
+      ]
+    },  
+    {
       title: 'Language',
       choices: [
         {name: 'SPANISH', values: ['1'], label: 'Spanish'},
@@ -71,7 +89,8 @@ new App({
         {name: 'YIDDISH', values: ['1'], label: 'Yiddish'},
         {name: 'other_languages', values: ['1'], label: 'Other'}
       ]
-    },    
+    }
+      
   ],
   facilitySearch: {displayField: 'search_label', nameField: 'ORGANIZATION_NAME'},
   decorations: decorations,

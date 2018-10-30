@@ -128,7 +128,7 @@ a.btn.rad-all.call, button.btn.rad-all.call {
   opacity: 1;
 }
             
-.facility .name.accessible {
+.facility .name.accessible, .srch-lbl-lg1 {
   background-image: url("../img/acc.svg");
   background-size: 20px;
   background-repeat: no-repeat;

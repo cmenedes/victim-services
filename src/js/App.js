@@ -21,24 +21,7 @@ class App extends FinderApp {
 
   ready(features){
     super.ready(features)
-    const choices = []
-    Object.keys(decorations.culturalCompetencies).forEach(comp => {
-      if (comp.trim()) {
-        choices.push({
-          name: 'CULTURAL_COMPETENCIES_SPECIALIZATIONS',
-          values: [comp],
-          label: comp
-        })
-      }
-    })
-    choices.sort((a, b) => {
-      if (a.label < b.label) return -1
-      if (a.label > b.label) return 1
-      return 0
-    })
-
-    this.filters.addFilter(choices)
-
+    
     $('#filters.tab.tab-2 .clps .btn').trigger('click')
     const reset = $('<button class="btn rad-all reset">Reset</button>').click(() => {
       finderApp.filters.choiceControls.forEach(ctl => {
