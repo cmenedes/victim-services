@@ -3,6 +3,7 @@
  */
 
 import $ from 'jquery'
+import popuphack from './popuphack'
 import decorations from './decorations'
 import style from './style'
 
