@@ -8,12 +8,12 @@ import {getCenter as olExtentGetCenter} from 'ol/extent'
 
 MultiFeaturePopup.prototype.showFeatures = function(features, coordinate) {
   coordinate = coordinate || olExtentGetCenter(features[0].getGeometry().getExtent())
+  this.content.find('.fjc-btns, .count-of').remove()
   if (features.length === 1) {
     this.pagerShow(features)
   } else {
     const fjcFeatures = features.filter(feature => feature.getFJC())
     const otherFeatures = features.filter(feature => !feature.getFJC())
-    this.content.find('.fjc-btns, .count-of').remove()
     if (fjcFeatures.length === 0) {
       this.pagerShow(otherFeatures)
     } else {
