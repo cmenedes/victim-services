@@ -48,6 +48,9 @@
     "testMatch": [
       "**/__tests__/**/*.test.js"
     ],
+    "setupFiles": [
+      "./__tests__/jest-setup.js"
+    ],
     "transformIgnorePatterns": []
   }
 }
