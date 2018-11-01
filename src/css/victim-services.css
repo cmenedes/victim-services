@@ -128,7 +128,7 @@ a.btn.rad-all.call, button.btn.rad-all.call {
   opacity: 1;
 }
             
-.facility .name.accessible, .srch-lbl-lg1 {
+.facility .name.accessible, .srch-lbl-lg10 {
   background-image: url("../img/acc.svg");
   background-size: 20px;
   background-repeat: no-repeat;
@@ -136,19 +136,29 @@ a.btn.rad-all.call, button.btn.rad-all.call {
   padding-bottom: 5px;
 }
 
-/* .facility .name.fjc {
+.facility .name.fjc, .srch-lbl-lg01 {
   background-image: url("../img/icon-fjc.svg");
-  background-size: 2px;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  padding-left: 23px;
+  padding-bottom: 5px;
+}
+
+.facility .name.accessible.fjc, .srch-lbl-lg11 {
+  background-image: url("../img/acc-fjc.svg");
+  background-size: 20px;
+  background-repeat: no-repeat;
+  padding-left: 23px;
+  padding-bottom: 5px;
+}
+
+/* .facility .name, .srch-lbl-lg00 {
+  background-image: url("../img/no-acc-fjc.svg");
+  background-size: 20px;
   background-repeat: no-repeat;
   padding-left: 23px;
   padding-bottom: 5px;
 } */
-
-/* .facility .name.accessible.fjc {
-  background: url("../img/icon-fjc.svg") right top no-repeat, url("../img/acc.svg") left top no-repeat;
-  background-size: 20px;
-} */
-
 
 .pop .btn-x, {
   background-image: var(--x-icon-light);

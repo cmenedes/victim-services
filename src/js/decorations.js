@@ -41,7 +41,7 @@ const decorations = {
     this.__prop__=this.getProperties()
     this.set(
       'search_label',
-      `<span class="srch-lbl-lg${this.get('WHEELCHAIR_ACCESS')}">${this.get('ORGANIZATION_NAME')}</span><br>
+      `<span class="srch-lbl-lg${this.get('WHEELCHAIR_ACCESS') === '1' ? 1 : 0}${this.get('LOCATION_NAME').toLowerCase().indexOf('family justice center') > -1 ? '1' : '0'}">${this.get('ORGANIZATION_NAME')}</span><br>
       <span class="srch-lbl-sm">${this.get('LOCATION_NAME')}</span>`
     )
     this.set(
