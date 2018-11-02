@@ -109,7 +109,7 @@ describe('dialogHandlers', () => {
     info.remove()
   })
   test('dialogHandlers', () => {
-    expect.assertions(5)
+    expect.assertions(6)
 
     const app = new App('mock-options')
     
@@ -118,18 +118,52 @@ describe('dialogHandlers', () => {
     expect(Dialog).toHaveBeenCalledTimes(2)
     expect(Dialog.mock.calls[0][0]).toBe('phone-dia')
     expect(Dialog.mock.calls[1][0]).toBe('info-dia')
-    app.splash.trigger('click')
-    app.phn.trigger('click')
-    app.info.trigger('click')
+    app.splashBtn.trigger('click')
+    expect(App.prototype.showPhoneDialog).toBeCalledTimes(1)
+    app.phoneBtn.trigger('click')
     expect(App.prototype.showPhoneDialog).toBeCalledTimes(2)
+    app.infoBtn.trigger('click')
     expect(App.prototype.showInfoDialog).toBeCalledTimes(1)
-    
   })
+
+})
+
+describe('dialog tests', () => {
+  let dialogContainer
+  let phoneContent
+  beforeEach(() => {
+    dialogContainer = $('<div class="dia-container splash"></div>')
+    phoneContent = $('<div id="phone-content"></div>')
+    $('body').append(dialogContainer)
+      .append(phoneContent)
+  })
+  afterEach(() => {
+    dialogContainer.remove()
+    phoneContent.remove()
+  })
+
   test('showPhoneDialog', () => {
+    expect.assertions(8)
 
+    const app = new App('mock-options')
+
+    app.phoneDialog = new Dialog('phone-dia')
+
+    expect(phoneContent.length).toBe(1)
+    expect(dialogContainer.css('display')).toBe('block')
+
+    app.showPhoneDialog()
+
+    expect(dialogContainer.css('display')).toBe('none')
+    expect($.mocks.fadeOut).toBeCalledTimes(1)
+    expect($.mocks.fadeOut.mock.instances[0].get(0)).toBe(dialogContainer.get(0))
+
+    expect(app.phoneDialog.ok).toBeCalledTimes(1)
+    expect(app.phoneDialog.ok.mock.calls[0][0].message.get(0)).toBe(phoneContent.get(0))
+    expect(app.phoneDialog.ok.mock.calls[0][0].buttonText[0]).toBe('Close')
   })
-  test('showInfoDialog', () => {
 
-  })
+  // test('showInfoDialog', () => {
 
+  // })
 })

@@ -6,12 +6,8 @@ import $ from 'jquery'
 import popuphack from './popuphack'
 import decorations from './decorations'
 import style from './style'
-
 import FinderApp from 'nyc-lib/nyc/ol/FinderApp'
-import Filters from './Filters'
 import Dialog from 'nyc-lib/nyc/Dialog'
-
-
 
 class App extends FinderApp {
   /**
@@ -20,7 +16,7 @@ class App extends FinderApp {
    * @constructor
    */  
 
-  ready(features){
+  ready(features) {
     super.ready(features)
     
     $('#filters.tab.tab-2 .clps .btn').trigger('click')
@@ -40,12 +36,12 @@ class App extends FinderApp {
     })
   }
 
-  dialogHandlers(){
+  dialogHandlers() {
     this.phoneDialog = new Dialog('phone-dia')
     this.infoDialog = new Dialog('info-dia')
-    this.splash = $('#splash-content button').click($.proxy(this.showPhoneDialog, this))
-    this.phn = $('#phn a.btn-phn').click($.proxy(this.showPhoneDialog, this))
-    this.info = $('#info a.btn-info').click($.proxy(this.showInfoDialog, this))
+    this.splashBtn = $('#splash-content button').click($.proxy(this.showPhoneDialog, this))
+    this.phoneBtn = $('#phn a.btn-phn').click($.proxy(this.showPhoneDialog, this))
+    this.infoBtn = $('#info a.btn-info').click($.proxy(this.showInfoDialog, this))
   }
 
   showPhoneDialog() {
