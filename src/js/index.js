@@ -1,6 +1,6 @@
 import App from './App'
 import decorations from './decorations'
-import style from './style'
+import facilityStyle from './facility-style'
 import CsvPoint from 'nyc-lib/nyc/ol/format/CsvPoint'
 
 new App({
@@ -17,7 +17,7 @@ new App({
     y: 'Y',
     defaultDataProjection: 'EPSG:2263'
   }),
-  facilityStyle: style,
+  facilityStyle: facilityStyle.pointStyle,
   filterChoiceOptions: [
     {
       title: 'Age Group',

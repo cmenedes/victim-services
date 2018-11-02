@@ -5,7 +5,6 @@
 import $ from 'jquery'
 import popuphack from './popuphack'
 import decorations from './decorations'
-import style from './style'
 import FinderApp from 'nyc-lib/nyc/ol/FinderApp'
 import Dialog from 'nyc-lib/nyc/Dialog'
 

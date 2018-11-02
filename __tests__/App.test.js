@@ -189,3 +189,24 @@ describe('dialog tests', () => {
     expect(app.infoDialog.ok.mock.calls[0][0].buttonText[0]).toBe('Close')
   })
 })
+
+describe('isFiltered', () => {
+  let filterButton
+  beforeEach(() => {
+    filterButton = $('<div id="tabs"><div class="btns"><h2><button class="btn btn-tab btn-2" role="tab" id="tab-btn-2">Filters</button></h2></div></div>')
+    $('body').append(filterButton)
+  })
+  afterEach(() => {
+    filterButton.remove()
+  })
+  
+  test('isFiltered', () => {
+    expect.assertions(2)
+    const app = new App('mock-options')
+
+    expect(app.isFiltered()).toBe(false)
+    filterButton.find('button').addClass('filtered')
+    expect(app.isFiltered()).toBe(true)
+    
+  })
+})
