@@ -187,6 +187,5 @@ describe('dialog tests', () => {
     expect(app.infoDialog.ok).toBeCalledTimes(1)
     expect(app.infoDialog.ok.mock.calls[0][0].message.get(0)).toBe(infoContent.get(0))
     expect(app.infoDialog.ok.mock.calls[0][0].buttonText[0]).toBe('Close')
-    
   })
 })

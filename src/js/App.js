@@ -59,6 +59,10 @@ class App extends FinderApp {
       buttonText: ['Close']
     })
   }
+
+  isFiltered() {
+    return $('#tabs .btns .btn-2').hasClass('filtered')
+  }
 }
 
 
