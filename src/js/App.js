@@ -58,7 +58,7 @@ class App extends FinderApp {
       message: $('#info-content'),
       buttonText: ['Close']
     })
-}
+  }
 }
 
 
