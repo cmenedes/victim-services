@@ -327,14 +327,16 @@ a.filter-info {
 .fjc-btns {
   padding-top: 12px;
 }
+
 .fnd .pop .fjc-btns button {
   display: block;
-  width: 293px;
+  width: calc(100% - 10px);
   margin-top: 3px;
   white-space: normal;
   padding: 8px 0;
   height: auto;
 }
+
 .it-pg .btns {
-  width: 293px;
+  width: calc(100% - 3px);
 }

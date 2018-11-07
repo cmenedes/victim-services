@@ -3,10 +3,6 @@ import Choice from 'nyc-lib/nyc/Choice'
 import Dialog from 'nyc-lib/nyc/Dialog'
 import App from '../src/js/App'
 import $ from 'jquery'
-import CsvPoint from 'nyc-lib/nyc/ol/format/CsvPoint'
-import style from '../src/js/style'
-import decorations from '../src/js/decorations'
-import { ENETRESET } from 'constants';
 
 jest.mock('nyc-lib/nyc/ol/FinderApp')
 jest.mock('nyc-lib/nyc/Choice')
