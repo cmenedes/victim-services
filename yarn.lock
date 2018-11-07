@@ -4631,9 +4631,9 @@ nyc-build-helper@^0.0.23:
     webpack "^4.16.1"
     zip-dir "^1.0.2"
 
-nyc-lib@^1.1.95:
-  version "1.1.95"
-  resolved "https://registry.yarnpkg.com/nyc-lib/-/nyc-lib-1.1.95.tgz#8521c7cb9f189542827ba5244b2e93b95ad45fa0"
+nyc-lib@^1.1.96:
+  version "1.1.96"
+  resolved "https://registry.yarnpkg.com/nyc-lib/-/nyc-lib-1.1.96.tgz#80c07c22e8506c5ef1bc7fd258ac9567b4d5eaea"
   dependencies:
     babel-polyfill "^6.26.0"
     isomorphic-fetch "^2.2.1"
