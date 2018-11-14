@@ -22,9 +22,6 @@ MultiFeaturePopup.prototype.showFeatures = function(features, coordinate) {
   }
   this.show({coordinate: coordinate})
 
-  setTimeout(() => {
-    this.pan()
-  }, 1000)
 }
 
 MultiFeaturePopup.prototype.pagerShow = function(features) {

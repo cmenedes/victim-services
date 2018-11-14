@@ -38,8 +38,7 @@ span.srch-lbl-sm {
 }
 
 .btn-sq{
-  background-color: var(--color-icons);
-  color: black;
+  background-color: var(--color-dark);
   border: 1px solid black;
 }
 
@@ -119,12 +118,12 @@ a.btn.rad-all.call, button.btn.rad-all.call {
 
 
 .clps button:before {
-  background-color: var(--color-icons);
+  background-color: var(--color-dark);
   opacity: 0.50;
 }   
 
 .clps button:hover:before {
-  background-color: var(--color-icons);
+  background-color: var(--color-dark);
   opacity: 1;
 }
             
@@ -162,23 +161,23 @@ a.btn.rad-all.call, button.btn.rad-all.call {
 
 .pop .btn-x, {
   background-image: var(--x-icon-light);
-  background-color: var(--color-icons);
+  background-color: var(--color-dark);
   opacity: 0.50;  
 }
 
 .pop .btn-x:hover,  {
   background-image: var(--x-icon-light);
-  background-color: var(--color-icons);
+  background-color: var(--color-dark);
   opacity: 1;  
  }
 
 .btn-rnd {
-  background-color: var(--color-icons);
+  background-color: var(--color-dark);
   opacity: 0.50; 
 }
 
 .btn-rnd:hover {
-  background-color: var(--color-icons);
+  background-color: var(--color-dark);
   opacity: 1;  
 }
  
@@ -250,7 +249,7 @@ a.filter-info {
 }
 
 .fnd .splash .dia, .phone-dia .dia, .info-dia .dia {
-  background-color: var(--color-icons);
+  background-color: var(--color-dark);
 }
 
 .fnd .splash .dia-msg button, #phone-content a, #info-content a {
@@ -340,3 +339,13 @@ a.filter-info {
 .it-pg .btns {
   width: calc(100% - 3px);
 }
+
+.fnd #home:focus svg {
+  stroke:#3b99fc;
+  stroke-width: 3px;
+  fill:#3b99fc;
+  fill-opacity:.2;
+  transform:scale(.53);
+  margin-top:-8px;
+  margin-left:-33.25px
+ }

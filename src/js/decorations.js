@@ -38,7 +38,6 @@ const decorations = {
     const count = decorations.countByLocation[locationKey] || 0
     decorations.countByLocation[locationKey] = count + 1
     this.locationKey = locationKey
-    this.__prop__=this.getProperties()
     this.set(
       'search_label',
       `<span class="srch-lbl-lg${this.get('WHEELCHAIR_ACCESS') === '1' ? 1 : 0}${this.get('LOCATION_NAME').toLowerCase().indexOf('family justice center') > -1 ? '1' : '0'}">${this.get('ORGANIZATION_NAME')}</span><br>
@@ -84,7 +83,7 @@ const decorations = {
     return this.get('fjc') ? 'fjc' : ''
   },
   locationHtml() {
-    const div = $('<div class="location notranslate fjc" translate="no"></div>')
+    const div = $('<div class="location notranslate" translate="no"></div>')
     return div.html(this.get('LOCATION_NAME'))
   },
   nameHtml() {
@@ -96,6 +95,7 @@ const decorations = {
     }
     if(this.getFJC()){
       html.addClass('fjc')
+      location.append('<div class="screen-reader-only"> - this is a family justice center</div>')
     }
     return html.add(location)
       
