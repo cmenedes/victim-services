@@ -86,7 +86,7 @@ const accessibleFeature = new OlFeature({
   OTHER_LANGUAGE: '',
   INTERPRETATION_SERVICE_OFFERED: 1,
   WHEELCHAIR_ACCESS: 1,
-  REFERRAL_REQUIRED: '',
+  REFERRAL_REQUIRED: 'Self-Referral',
   CULTURAL_COMPETENCIES_SPECIALIZATIONS: 'All Communities',
   BOROUGH: 'Brooklyn',
   X: 962810,
@@ -98,7 +98,7 @@ nyc.mixin(accessibleFeature, [decorations])
 
 
 const notAccessibleFeature = new OlFeature({
-  ORGANIZATION_NAME: 'Organization 2 ',
+  ORGANIZATION_NAME: 'Organization 2',
   LOCATION_NAME: 'Organization 2 Center',
   ADDRESS_1: '2 Metrotech Center',
   ADDRESS_2: 'Brooklyn, NY 11201',

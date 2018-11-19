@@ -88,7 +88,7 @@ describe('decorations', () => {
 
   test('detailsHtml', () => {
     expect.assertions(1)
-    expect(accessibleFeature.detailsHtml().children().length).toBe(6)
+    expect(accessibleFeature.detailsHtml().children().length).toBe(7)
     // expect(accessibleFeature.detailsHtml()).toBe(
     //   `${accessibleFeature.hoursHtml()}${accessibleFeature.phoneHtml()}${accessibleFeature.eligibilityHtml()}${accessibleFeature.servicesHtml()}${accessibleFeature.languagesHtml()}${accessibleFeature.culturalHtml()}`
     // )
@@ -121,6 +121,13 @@ describe('decorations', () => {
     expect(notAccessibleFeature.culturalHtml()).toEqual(undefined)
   
   })
+
+  test('referralHtml', () => {
+    expect.assertions(2)
+    expect(accessibleFeature.referralHtml()).toEqual($('<div class="referral"><div class="name">Referral Required:</div><div>Self-Referral</div></div>'))
+    expect(notAccessibleFeature.referralHtml()).toEqual(undefined)
+  
+  })
   
 })
 
@@ -146,8 +153,11 @@ describe('Accessible facilities', () => {
 
   test('nameHtml isNotAccessible', () => {
     expect.assertions(1)
-    const loc = notAccessibleFeature.locationHtml()
-    expect(notAccessibleFeature.nameHtml()).toEqual($(`<h3 class="name notranslate">${notAccessibleFeature.getName()}</h3><div class = "location notranslate" translate="no">${notAccessibleFeature.get('LOCATION_NAME')}</div>`))
+
+    const div = $('<div></div>')
+
+    div.html(notAccessibleFeature.nameHtml())
+    expect(div.html()).toBe('<h3 class="name notranslate">Organization 2</h3><div class="location notranslate" translate="no">Organization 2 Center</div>')
   })
 
 })
@@ -157,8 +167,8 @@ test('phoneHtml with ext', () => {
   expect.assertions(2)
 
 
-  expect(accessibleFeature.phoneButton()).toEqual($('<a class="btn rad-all phone notranslate" translate="no" role="button">800-888-8888 ext. 1111</a>')
-  .attr('href', `tel:800-888-8888,1111`))
+  expect(accessibleFeature.phoneButton()).toEqual($('<a class="btn rad-all phone notranslate" href="tel:800-888-8888,1111" translate="no" role="button">800-888-8888 ext. 1111</a>'))
+  
   
   let button = false
   expect(accessibleFeature.phoneHtml(button)).toEqual($('<span>800-888-8888 ext. 1111</span>'))
@@ -169,8 +179,7 @@ test('phoneHtml no ext', () => {
   expect.assertions(2)
 
 
-  expect(notAccessibleFeature.phoneButton()).toEqual($('<a class="btn rad-all phone notranslate" translate="no" role="button">800-888-8888</a>')
-  .attr('href', `tel:800-888-8888`))
+  expect(notAccessibleFeature.phoneButton()).toEqual($('<a class="btn rad-all phone notranslate" href="tel:800-888-8888" translate="no" role="button">800-888-8888</a>'))
 
   let button = false
   expect(notAccessibleFeature.phoneHtml(button)).toEqual($('<span>800-888-8888</span>'))

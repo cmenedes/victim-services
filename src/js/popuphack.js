@@ -38,8 +38,8 @@ MultiFeaturePopup.prototype.showSplit = function(fjcFeatures, otherFeatures) {
     fjcButtons.find('.other').remove()
   }
   fjcButtons.find('button').click($.proxy(this.showSubset, this))
-  fjcButtons.find('.fjc').html(`${fjcFeatures.length} ${fjcFeatures[0].get('LOCATION_NAME')} facilities`)
-  fjcButtons.find('.other').prepend(`${otherFeatures.length} `)
+  fjcButtons.find('.fjc').html(`${fjcFeatures[0].get('LOCATION_NAME')} <br> - Click for details`)
+  .append()
   this.content.find('.fjc-btns').show()
   this.content.find('.it-pg').hide()
   this.content.append(fjcButtons)
@@ -62,7 +62,8 @@ MultiFeaturePopup.prototype.showSubset = function(event) {
   this.pagerShow(features)
 }
 
+/* TODO: fix css on website button */
 const popuphack = {
-  BUTTONS_HTML: '<div class="fjc-btns"><button class="btn rad-all fjc"></button><button class="btn rad-all other">Other facilities</button></div>',
+  BUTTONS_HTML: '<div class="fjc-btns"><button class="btn rad-all fjc"></button><a class="btn rad-all web" target="__blank "href="https://www1.nyc.gov/site/ocdv/programs/family-justice-centers.page">Website</a><button class="btn rad-all other">Other facilities</button></div>',
   COUNT_OF_HTML: '<span class="count-of"></span>'
 }

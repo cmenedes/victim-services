@@ -126,6 +126,7 @@ const decorations = {
     return div.append(this.hoursHtml())
       .append(phone.append(this.phoneHtml()))
       .append(this.eligibilityHtml())
+      .append(this.referralHtml())
       .append(this.servicesHtml())
       .append(this.languagesHtml())
       .append(this.culturalHtml())
@@ -150,7 +151,9 @@ const decorations = {
   },
   servicesHtml() {
     const div = $('<div class="services"><div class="name">Services offered:</div></div>')
-    return div.append(this.makeList(this.services, this.get('OTHER_SERVICE')))
+    const ul = this.makeList(this.services, this.get('OTHER_SERVICE'))
+    if (ul.children().length)
+      return div.append(ul)
   },
   languagesHtml() {
     const ul = this.makeList(this.languages, this.get('OTHER_LANGUAGE'))
@@ -168,6 +171,13 @@ const decorations = {
     if (cultural){
       return $('<div class="cultural"><div class="name">Cultural competency specializations:</div></div>')
         .append(`<div>${cultural}</div>`)
+    }
+  },
+  referralHtml() {
+    const referral = this.get('REFERRAL_REQUIRED')
+    if (referral){
+      return $('<div class="referral"><div class="name">Referral Required:</div></div>')
+        .append(`<div>${referral}</div>`)
     }
   },
   makeList(list, other) {
