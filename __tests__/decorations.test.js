@@ -136,8 +136,12 @@ describe('Accessible facilities', () => {
 
   test('nameHtml isAccessible & fjc', () => {
     expect.assertions(1)
-    expect(accessibleFeature.nameHtml()).toBe($(`<h3 class="name notranslate fjc accessible" translate="no">Organization</h3><div class = "location notranslate" translate="no">Brooklyn Family Justice Center <div class="screen-reader-only"> - this is a wheelchair accessible facility</div><div class="screen-reader-only"> - this is a family justice center</div></div></div>`))
 
+    const div = $('<div></div>')
+
+    div.html(accessibleFeature.nameHtml())
+
+    expect(div.html()).toBe('<h3 class="name notranslate accessible fjc">Organization</h3><div class="location notranslate" translate="no">Brooklyn Family Justice Center<div class="screen-reader-only"> - this is a wheelchair accessible facility</div><div class="screen-reader-only"> - this is a family justice center</div></div>')
   })
 
   test('nameHtml isNotAccessible', () => {
