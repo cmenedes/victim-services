@@ -298,10 +298,10 @@ a.filter-info {
 }
 
 .fjc-btns {
-  padding-top: 12px;
+  padding-top: 15px;
 }
 
-.fnd .pop .fjc-btns button {
+.fnd .pop .fjc-btns button, .fnd .pop .fjc-btns a {
   display: block;
   width: calc(100% - 10px);
   margin-top: 3px;
@@ -313,7 +313,6 @@ a.filter-info {
 .it-pg .btns {
   width: calc(100% - 3px);
 }
-
 @media only screen and (max-width : 499px) {
   .phone-dia .dia, .info-dia .dia {
     width: 90%;
@@ -332,4 +331,15 @@ a.filter-info {
     padding: 8px;
     margin-left: calc(-45% - 8px);
   }
+}
+
+.fjc-btns hr {
+  color: black;
+  height: 1px;
+  border-width: 0px;
+  background-color: white;
+}
+  
+.fnd .pop .fjc-btns a {
+  width: calc(100% - 12px);
 }

@@ -181,7 +181,7 @@ const decorations = {
   referralHtml() {
     const referral = this.get('REFERRAL_REQUIRED')
     if (referral){
-      return $('<div class="referral"><div class="name">Referral Required:</div></div>')
+      return $('<div class="referral"><div class="name">Referral required:</div></div>')
         .append(`<div>${referral}</div>`)
     }
   },
