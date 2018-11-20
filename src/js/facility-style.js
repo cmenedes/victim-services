@@ -8,13 +8,6 @@ import Text from 'ol/style/Text'
 import Fill from 'ol/style/Fill'
 import nycOl from 'nyc-lib/nyc/ol' 
 
-import Point from 'ol/geom/Point'
-
-Point.prototype.containsXY = function(x, y) {
-  const coord = this.getCoordinates()
-  return coord[0] === x && coord[1] === y
-}
-
 const facilityStyle = {
   textStyle: (size, count, style) => {
       const fontSize = count > 9 ? 15 : 20

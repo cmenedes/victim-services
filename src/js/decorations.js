@@ -51,6 +51,11 @@ const decorations = {
       'fjc',
       this.get('LOCATION_NAME').toLowerCase().indexOf('family justice center') > -1 ? '1' : ''
     )
+    this.getGeometry().containsXY = function(x, y) {
+      const coord = this.getCoordinates()
+      console.warn(x,y,coord)
+      return coord[0] === x && coord[1] === y
+    }
   },
   getCountAtLocation() {
     return decorations.countByLocation[this.locationKey]

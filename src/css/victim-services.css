@@ -11,8 +11,8 @@ span.srch-lbl-sm {
 }
 
 .fnd #banner {
-  background-size: 180px 25px;
-  padding-left: 187px;
+  background-size: 163px 24px;
+  padding-left: 170px;
 }
 
 .reset {
@@ -58,6 +58,7 @@ a.btn.rad-all.call, button.btn.rad-all.call {
   width: 33px;
   z-index: 1;
 }
+
 .btn-phn, a.btn-phn.btn-sq.rad-all {
   background-image: var(--phone-icon-light);
 }
@@ -81,6 +82,7 @@ a.btn.rad-all.call, button.btn.rad-all.call {
   height: 35px;
   width: 35px;
 }
+
 .btn-shr {
   height: 35px;
   width: 33px;
@@ -91,6 +93,7 @@ a.btn.rad-all.call, button.btn.rad-all.call {
   position: fixed;
   left: 43px;
 }
+
 .btn-shr, .shr .btns a {
   width: 35px;
   height: 35px;
@@ -115,7 +118,6 @@ a.btn.rad-all.call, button.btn.rad-all.call {
   left: 0px;
   top: 78px;
 }
-
 
 .clps button:before {
   background-color: var(--color-dark);
@@ -151,14 +153,6 @@ a.btn.rad-all.call, button.btn.rad-all.call {
   padding-bottom: 5px;
 }
 
-/* .facility .name, .srch-lbl-lg00 {
-  background-image: url("../img/no-acc-fjc.svg");
-  background-size: 20px;
-  background-repeat: no-repeat;
-  padding-left: 23px;
-  padding-bottom: 5px;
-} */
-
 .pop .btn-x, {
   background-image: var(--x-icon-light);
   background-color: var(--color-dark);
@@ -187,7 +181,6 @@ a.filter-info {
   background-position: center;
   width: 16px;
   height: 16px;
-  display: inline-block;
   float: right;
   color: rgb(0,124,186);
   border: 3px solid rgb(0,124,186);
@@ -291,25 +284,6 @@ a.filter-info {
   margin-top: -140px;
 }
 
-@media only screen and (max-width : 499px) {
-  .phone-dia .dia, .info-dia .dia {
-    width: 90%;
-    height: auto;
-    max-height: 300px;
-    padding: 8px;
-    margin-left: calc(-45% - 8px);
-  }
-}
-@media only screen and (max-height : 400px) {
-  .phone-dia .dia, .info-dia .dia {
-    width: 90%;
-    height: auto;
-    max-height: 290px;
-    padding: 8px;
-    margin-left: calc(-45% - 8px);
-  }
-}
-
 .pop>.content .name {
   margin-right: -8px;
 }
@@ -338,4 +312,24 @@ a.filter-info {
 
 .it-pg .btns {
   width: calc(100% - 3px);
+}
+
+@media only screen and (max-width : 499px) {
+  .phone-dia .dia, .info-dia .dia {
+    width: 90%;
+    height: auto;
+    max-height: 300px;
+    padding: 8px;
+    margin-left: calc(-45% - 8px);
+  }
+}
+
+@media only screen and (max-height : 400px) {
+  .phone-dia .dia, .info-dia .dia {
+    width: 90%;
+    height: auto;
+    max-height: 290px;
+    padding: 8px;
+    margin-left: calc(-45% - 8px);
+  }
 }
