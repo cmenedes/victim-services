@@ -15,7 +15,7 @@ describe('decorations', () => {
     })
 
   test('extendFeature', () => {
-    expect.assertions(4)
+    expect.assertions(8)
     accessibleFeature.extendFeature()
     expect(accessibleFeature.locationKey).toBe(`${accessibleFeature.get('X')}@${accessibleFeature.get('Y')}`)
     expect(accessibleFeature.get('search_label')).toBe(
@@ -24,6 +24,15 @@ describe('decorations', () => {
     expect(accessibleFeature.get('other_languages')).toBe(`${accessibleFeature.get('OTHER_LANGUAGE') !== '' ? '1' : ''}`)
     expect(accessibleFeature.get('fjc')).toBe(`${accessibleFeature.get('LOCATION_NAME').toLowerCase().indexOf('family justice center') > -1 ? '1' : ''}`)
     /* TODO: test count by location */
+  
+    
+      const point = accessibleFeature.getGeometry()
+      const xy = point.getCoordinates()
+
+      expect(point.containsXY(xy[0],xy[1])).toBe(true)
+      expect(point.containsXY(xy[0],3)).toBe(false)
+      expect(point.containsXY(2,xy[1])).toBe(false)
+      expect(point.containsXY(0,3)).toBe(false)
   })
 
   test('getAddress1', () => {

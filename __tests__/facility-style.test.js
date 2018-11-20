@@ -2,15 +2,7 @@ import Point from 'ol/geom/Point'
 import facilityStyle from '../src/js/facility-style'
 import Feature from 'ol/Feature'
 
-test('Point#containsXY', () => {
-  expect.assertions(4)
-  let point = new Point([1,2])
-  expect(point.containsXY(1,2)).toBe(true)
-  expect(point.containsXY(1,3)).toBe(false)
-  expect(point.containsXY(2,2)).toBe(false)
-  expect(point.containsXY(0,3)).toBe(false)
-  
-})
+
 
 describe('textStyle', () => {
   test('textStyle count < 10', () => {
