@@ -339,13 +339,3 @@ a.filter-info {
 .it-pg .btns {
   width: calc(100% - 3px);
 }
-
-.fnd #home:focus svg {
-  stroke:#3b99fc;
-  stroke-width: 3px;
-  fill:#3b99fc;
-  fill-opacity:.2;
-  transform:scale(.53);
-  margin-top:-8px;
-  margin-left:-33.25px
- }
