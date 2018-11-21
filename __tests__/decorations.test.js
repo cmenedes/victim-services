@@ -133,7 +133,7 @@ describe('decorations', () => {
 
   test('referralHtml', () => {
     expect.assertions(2)
-    expect(accessibleFeature.referralHtml()).toEqual($('<div class="referral"><div class="name">Referral Required:</div><div>Self-Referral</div></div>'))
+    expect(accessibleFeature.referralHtml()).toEqual($('<div class="referral"><div class="name">Referral required:</div><div>Self-Referral</div></div>'))
     expect(notAccessibleFeature.referralHtml()).toEqual(undefined)
   
   })

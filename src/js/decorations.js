@@ -53,7 +53,6 @@ const decorations = {
     )
     this.getGeometry().containsXY = function(x, y) {
       const coord = this.getCoordinates()
-      console.warn(x,y,coord)
       return coord[0] === x && coord[1] === y
     }
   },

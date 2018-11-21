@@ -162,7 +162,7 @@ nyc.mixin(accessibleFeature, [decorations])
 
 
 
-const notAccessibleFeatureSource = new OlFeature({
+const notAccessibleFeatureSource = {
   ORGANIZATION_NAME: 'Organization 2',
   LOCATION_NAME: 'Organization 2 Center',
   ADDRESS_1: '2 Metrotech Center',
@@ -217,7 +217,7 @@ const notAccessibleFeatureSource = new OlFeature({
   X: 962810,
   Y: 173464,
   WEBSITE: 'http://www.aafscny.org/'
-})
+}
 const notAccessibleFeature = csvPoint.readFeature(notAccessibleFeatureSource)
 nyc.mixin(notAccessibleFeature, [decorations])
 
