@@ -1,16 +1,19 @@
 import FinderApp from 'nyc-lib/nyc/ol/FinderApp'
+import FJCPopup from '../src/js/FJCPopup'
 import Choice from 'nyc-lib/nyc/Choice'
 import Dialog from 'nyc-lib/nyc/Dialog'
 import App from '../src/js/App'
 import $ from 'jquery'
 
 jest.mock('nyc-lib/nyc/ol/FinderApp')
+jest.mock('../src/js/FJCPopup')
 jest.mock('nyc-lib/nyc/Choice')
 jest.mock('nyc-lib/nyc/Dialog')
 
 beforeEach(() => {
   $.resetMocks()
   FinderApp.mockReset()
+  FJCPopup.mockReset()
   Choice.mockReset()
   Dialog.mockReset()
 })
