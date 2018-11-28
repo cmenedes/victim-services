@@ -3,10 +3,10 @@
  */
 
 import $ from 'jquery'
-import popuphack from './popuphack'
 import decorations from './decorations'
 import FinderApp from 'nyc-lib/nyc/ol/FinderApp'
 import Dialog from 'nyc-lib/nyc/Dialog'
+import FJCPopup from './FJCPopup';
 
 class App extends FinderApp {
   /**
@@ -14,10 +14,17 @@ class App extends FinderApp {
    * @public
    * @constructor
    */  
+  constructor(options) {
+    super(options)
+    this.popup = new FJCPopup({
+      map: this.map,
+      layers: [this.layer]
+    })
+  }
 
   ready(features) {
     super.ready(features)
-    
+
     $('#filters.tab.tab-2 .clps .btn').trigger('click')
     this.reset = $('<button class="btn rad-all reset">Reset</button>')
       .click($.proxy(this.resetFilters, this))
