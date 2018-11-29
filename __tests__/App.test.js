@@ -18,6 +18,46 @@ beforeEach(() => {
   Dialog.mockReset()
 })
 
+describe('constructor', () => {
+  const makePopup = App.prototype.makePopup
+  beforeEach(() => {
+    App.prototype.makePopup = jest.fn()
+  })
+  afterEach(() => {
+    App.prototype.makePopup = makePopup
+  })
+
+  test('constructor', () => {
+    expect.assertions(1)
+    const app = new App('mock-options')
+    expect(app.makePopup).toHaveBeenCalledTimes(1)  
+
+  })
+})
+
+describe('makePopup', () => {
+  const makePopup = App.prototype.makePopup
+  beforeEach(() => {
+    App.prototype.makePopup = jest.fn()
+  })
+  afterEach(() => {
+    App.prototype.makePopup = makePopup
+  })
+
+  test('makePopup', () => {
+    expect.assertions(3)
+    const app = new App('mock-options')
+    app.makePopup = makePopup
+    app.map = 'mock-map'
+    app.layer = 'mock-layer'
+    app.makePopup()
+    expect(FJCPopup).toHaveBeenCalledTimes(1)
+    expect(FJCPopup.mock.calls[0][0].map).toBe('mock-map')
+    expect(FJCPopup.mock.calls[0][0].layers).toEqual(['mock-layer'])
+      
+  })
+})
+
 describe('ready', () => {
   const dialogHandlers = App.prototype.dialogHandlers
   const resetFilters = App.prototype.resetFilters

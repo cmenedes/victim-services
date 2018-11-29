@@ -108,6 +108,7 @@ describe('decorations', () => {
   test('hoursHtml', () => {
     expect.assertions(2)
     expect(accessibleFeature.hoursHtml()).toEqual($('<div class="hours"><div class="name">Hours of operation:</div><div>Monday - Friday: 9 am - 5 pm<div></div></div> (Saturday: 8 am - 8 pm)</div>'))
+    
     expect(notAccessibleFeature.hoursHtml()).toEqual($('<div class="hours"><div class="name">Hours of operation:</div><div>Monday - Friday: 9 am - 5 pm<div></div></div>'))
 
   })
@@ -115,13 +116,24 @@ describe('decorations', () => {
   test('eligibilityHtml', () => {
     expect.assertions(2)
     expect(accessibleFeature.eligibilityHtml()).toEqual($('<div class="eligibility"><div class="name">Eligibility criteria:</div>Serves NYC Residents Only</div>'))
+
     expect(notAccessibleFeature.eligibilityHtml()).toEqual(undefined)
   })
 
   test('servicesHtml', () => {
-    expect.assertions(1)
+    expect.assertions(2)
     expect(accessibleFeature.servicesHtml()).toEqual($('<div class="services"><div class="name">Services offered:</div><ul><li>case management</li><li>crisis intervention</li><li>legal services</li><li>safety planning</li><li>immigration services</li><li>emergency or transitional shelter</li><li>permanent housing</li><li>health care</li><li>mental health counseling</li><li>drug addiction screening and treatment</li><li>language interpretation</li><li>public benefits</li><li>job training and economic empowerment</li><li>restorative justice</li><li>other health services</li></ul></div>'))
 
+    expect(notAccessibleFeature.servicesHtml()).toBe(undefined)
+    
+  })  
+
+  test('languagesHtml', () => {
+    expect.assertions(2)
+    expect(accessibleFeature.languagesHtml()).toEqual($('<div class="languages"><div class="name">Languages offered:</div><ul><li>spanish</li><li>arabic</li><li>bengali</li><li>chinese</li><li>french</li><li>haitian creole</li><li>italian</li><li>korean</li><li>polish</li><li>russian</li><li>urdu</li><li>yiddish</li><li>other language</li></ul></div>'))
+    
+    expect(notAccessibleFeature.languagesHtml()).toEqual($('<div class="languages"><div class="name">Languages offered:</div><ul><li>spanish</li><li>arabic</li><li>bengali</li><li>chinese</li><li>french</li><li>haitian creole</li><li>italian</li><li>korean</li><li>polish</li><li>russian</li><li>urdu</li><li>yiddish</li></ul></div>'))
+   
   })  
 
   test('culturalHtml', () => {
@@ -193,15 +205,6 @@ test('phoneHtml no ext', () => {
   let button = false
   expect(notAccessibleFeature.phoneHtml(button)).toEqual($('<span>800-888-8888</span>'))
 
-})
-
-
-/* TODO: languages Html & makeList */
-
-test('languagesHtml', () => {
-  //create ul of languages
-  //if ul has children create languages div
-    //if #children == length of languages && interpretation services, append interpretation services
 })
 
 

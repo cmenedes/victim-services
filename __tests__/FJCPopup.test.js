@@ -47,6 +47,16 @@ afterAll(() => {
   
 })
 
+test('constructor', () => {
+  expect.assertions(1)
+  const popup = new FJCPopup({
+    map: map,
+    layers: mockLayers
+  })
+
+  expect(popup).toBeInstanceOf(FJCPopup)
+})
+
 
 test('showFeatures', () => {
   expect.assertions(7)

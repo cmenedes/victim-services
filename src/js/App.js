@@ -16,13 +16,17 @@ class App extends FinderApp {
    */  
   constructor(options) {
     super(options)
+    this.makePopup()
+  }
+
+  makePopup(){
     this.popup = new FJCPopup({
       map: this.map,
       layers: [this.layer]
     })
   }
 
-  ready(features) {
+  ready(features){
     super.ready(features)
 
     $('#filters.tab.tab-2 .clps .btn').trigger('click')

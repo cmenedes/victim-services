@@ -154,20 +154,17 @@ const decorations = {
     }
   },
   servicesHtml() {
-    const div = $('<div class="services"><div class="name">Services offered:</div></div>')
     const ul = this.makeList(this.services, this.get('OTHER_SERVICE'))
-    if (ul.children().length)
+    if (ul.children().length){
+      const div = $('<div class="services"><div class="name">Services offered:</div></div>')
       return div.append(ul)
+    }
   },
   languagesHtml() {
     const ul = this.makeList(this.languages, this.get('OTHER_LANGUAGE'))
     if (ul.children().length){
       const div = $('<div class="languages"><div class="name">Languages offered:</div></div>')
-      if (ul.children().length == this.languages.length && this.get('INTERPRETATION_SERVICE_OFFERED')){
-        return div.append('<div>Interpretation service offered</div>')
-      }else{
-        return div.append(ul)
-      }
+      return div.append(ul)
     }
   },
   culturalHtml() {
