@@ -209,8 +209,27 @@ test('phoneHtml no ext', () => {
 
 
 test('makeList', () => {
-  //create ul
-  //if item in list is in data
-    //create list item: make lowercase and remove _ and -
-    //append item to ul
+  expect.assertions(4)
+  let ul
+  let listItem1 = 'ITEM-WITH-DASHES'
+  let listItem2 = 'ITEM_WITH_UNDERSCORES'
+  let other = 'other item'
+  const items = [listItem1, listItem2]
+
+  accessibleFeature.set(listItem1, 1)
+  accessibleFeature.set(listItem2, 1)
+  
+  ul = accessibleFeature.makeList(items, '')
+
+  expect(ul.children().length).toBe(items.length)
+  expect(ul).toEqual($('<ul><li>item with dashes</li><li>item with underscores</li></ul>'))
+  
+  ul = accessibleFeature.makeList(items, other)
+
+  expect(ul.children().length).toBe(items.length + 1)  
+  expect(ul).toEqual($('<ul><li>item with dashes</li><li>item with underscores</li><li>other item</li></ul>'))
+
+  accessibleFeature.unset(listItem1)
+  accessibleFeature.unset(listItem2)
+
 })
