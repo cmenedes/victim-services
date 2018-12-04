@@ -1,18 +1,14 @@
 import $ from 'jquery'
-import {getCenter as olExtentGetCenter} from 'ol/extent'
 import OlMap from 'ol/Map'
 import OlView from 'ol/View'
-import OlFeature from 'ol/Feature'
-import OlGeomPoint from 'ol/geom/Point'
 import ItemPager from 'nyc-lib/nyc/ItemPager'
-import Popup from 'nyc-lib/nyc/ol/Popup'
-import FeaturePopup from 'nyc-lib/nyc/ol/FeaturePopup'
 import MultiFeaturePopup from 'nyc-lib/nyc/ol/MultiFeaturePopup'
 import FJCPopup from '../src/js/FJCPopup'
 import nyc from 'nyc-lib/nyc'
 import decorations from '../src/js/decorations'
 import CsvPoint from 'nyc-lib/nyc/ol/format/CsvPoint'
 
+jest.mock('nyc-lib/nyc/ItemPager')
 
 class MockLayer {
   set(prop, val) {
@@ -22,9 +18,7 @@ class MockLayer {
     return this[prop]
   }
 }
-const mockLayers = [new MockLayer(), new MockLayer()]
-const mockLayer = new MockLayer()
-let map, target
+const mockLayers = [new MockLayer()]
 
 const fjcFeatureSource = {
   LOCATION_NAME: 'Brooklyn Family Justice Center',
@@ -56,9 +50,10 @@ nyc.mixin(nonFjcFeature, [decorations])
 fjcFeature.extendFeature()
 nonFjcFeature.extendFeature()
 
-let features 
+let map, target, options
 
-beforeAll(() => {
+beforeEach(() => {
+  ItemPager.mockReset()
   target = $('<div></div>').css({width: '500px', height: '500px'})
   $('body').append(target)
 
@@ -69,33 +64,34 @@ beforeAll(() => {
       zoom: 0
     })
   })
+
+  options = {
+    map: map,
+    layers: mockLayers
+  }
   
 })
 
-afterAll(() => {
+afterEach(() => {
   target.remove()
-  
 })
 
 test('constructor', () => {
-  expect.assertions(2)
-  const popup = new FJCPopup({
-    map: map,
-    layers: mockLayers
-  })
+  expect.assertions(4)
+  const popup = new FJCPopup(options)
 
   expect(popup).toBeInstanceOf(FJCPopup)
-
-  expect(popup.pager instanceof ItemPager).toBe(true)
+  expect(popup).toBeInstanceOf(MultiFeaturePopup)
+  expect(ItemPager).toHaveBeenCalledTimes(1)
+  expect(ItemPager.mock.instances[0]).toBe(popup.pager)
 })
 
 describe('showFeatures', () => {
   const show = FJCPopup.prototype.show 
-  const showFeatures = FJCPopup.prototype.showFeatures
   const showSplit = FJCPopup.prototype.showSplit
   const pagerShow = FJCPopup.prototype.pagerShow
   
-  let csvPoint, popup
+  let popup
   
   beforeEach(() => {
     FJCPopup.prototype.show = jest.fn()    
@@ -118,7 +114,7 @@ describe('showFeatures', () => {
   test('showFeatures w/o coordinates - pagerShow: 1 Feature', () => {
     expect.assertions(5)
 
-    features = [nonFjcFeature]
+    const features = [nonFjcFeature]
 
     popup.showFeatures(features)
   
@@ -137,7 +133,7 @@ describe('showFeatures', () => {
   test('showFeatures - pagerShow: Multiple Features 2 nonFJC', () => {
     expect.assertions(4)
     
-    features = [nonFjcFeature, nonFjcFeature]
+    const features = [nonFjcFeature, nonFjcFeature]
   
     popup.showFeatures(features, [1,1])
   
@@ -153,7 +149,7 @@ describe('showFeatures', () => {
   test('showFeatures w/coordinates - showSplit: 1 FJC & 1 nonFJC', () => {
     expect.assertions(7)
 
-    features = [fjcFeature, nonFjcFeature]
+    const features = [fjcFeature, nonFjcFeature]
 
     popup.showFeatures(features, [1,1])
 
@@ -168,97 +164,68 @@ describe('showFeatures', () => {
     
     expect(FJCPopup.prototype.show.mock.calls[0][0]).toEqual({coordinate: [1,1]})
   })
+})
 
+test('pagerShow', () => {
+  expect.assertions(5)
+
+  const popup = new FJCPopup(options)
+  const features = [nonFjcFeature, nonFjcFeature]
+
+  expect(ItemPager.mock.instances[0]).toBe(popup.pager)
+
+  popup.pagerShow(features)
+
+  expect(ItemPager.mock.instances[0].show).toHaveBeenCalledTimes(1)
+  expect(ItemPager.mock.instances[0].show.mock.calls[0][0]).toBe(features)
+
+  expect(popup.pager.show).toHaveBeenCalledTimes(1)
+  expect(popup.pager.show.mock.calls[0][0]).toBe(features)
   
 })
 
 
-describe('pagerShow', () => {
-  const pagerShow = FJCPopup.prototype.pagerShow
-  const show = ItemPager.prototype.show
+// test('showSplit', () => {
+
+
+// })
+
+// describe('showSubset', () => {
+//   test('showSubset if FJC is clicked', () => {
   
-  let popup
+//     //button.fjc is hidden
+//     //button.other is visible
+//     //count of 'Family Justice Centers' is visible
+//     //.fjc-btns is visible if there are no other facilities at location
   
-  beforeEach(() => {
-    FJCPopup.prototype.pagerShow = jest.fn()        
-    ItemPager.prototype.show = jest.fn()        
-    
-    popup = new FJCPopup({
-      map: map,
-      layers: mockLayers
-    })
-    
-  afterEach(() => {
-    FJCPopup.prototype.pagerShow = pagerShow
-    ItemPager.prototype.show = show
-    
-  })
-    
-  })
-  test('pagerShow', () => {
-    expect.assertions(2)
+//   })
+
+//   test('showSubset if FJC is clicked && otherFeatures == 0', () => {
   
-    features = [nonFjcFeature, nonFjcFeature]
-
-
-    // popup.showFeatures(features)
-    popup.pagerShow(features)
-
-    // expect(popup.content.find('.it-pg').length).toBe(1)
-    expect($(popup.content.find('.it-pg')).css('display')).toBe('block')
-    // expect($(popup.content.find('.btns')).length).toEqual(1)
-    expect($(popup.content.find('.btns')).css('display')).toBe('block')
-    
-
-    // console.info(ItemPager.show)
-    // expect(ItemPager.prototype.show).toHaveBeenCalledTimes(1)
-    // expect(ItemPager.prototype.show.mock.calls[0][0]).toBe(feature)
-  })
-
-})
-
-
-test('showSplit', () => {
-
-
-})
-
-describe('showSubset', () => {
-  test('showSubset if FJC is clicked', () => {
+//     //button.fjc is hidden
+//     //button.other is visible
+//     //count of 'Family Justice Centers' is visible
+//     //.fjc-btns is hidden 
   
-    //button.fjc is hidden
-    //button.other is visible
-    //count of 'Family Justice Centers' is visible
-    //.fjc-btns is visible if there are no other facilities at location
+//   })
   
-  })
-
-  test('showSubset if FJC is clicked && otherFeatures == 0', () => {
+//   test('showSubset if other is clicked', () => {
   
-    //button.fjc is hidden
-    //button.other is visible
-    //count of 'Family Justice Centers' is visible
-    //.fjc-btns is hidden 
-  
-  })
-  
-  test('showSubset if other is clicked', () => {
-  
-    //button.fjc is visible
-    //button.other is hidden
-    //count of 'Other Facilities' is visible
+//     //button.fjc is visible
+//     //button.other is hidden
+//     //count of 'Other Facilities' is visible
   
 
-  })
+//   })
 
-  test('showSubset either case', () => {
+//   test('showSubset either case', () => {
   
-    //in either case
-      //.fjc-btns css padding top and bottom set to 10px
-      //website button and hr is hidden
-      //pager is visible
+//     //in either case
+//       //.fjc-btns css padding top and bottom set to 10px
+//       //website button and hr is hidden
+//       //pager is visible
 
-  })
+//   })
 
 
-})
+// })
