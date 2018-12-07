@@ -182,50 +182,156 @@ test('pagerShow', () => {
   expect(popup.pager.show).toHaveBeenCalledTimes(1)
   expect(popup.pager.show.mock.calls[0][0]).toBe(features)
   
+
+})
+
+describe('showSplit', () => {
+  const showSubset = FJCPopup.prototype.showSubset
+  
+  beforeEach(() => {
+    FJCPopup.prototype.showSubset = jest.fn()
+    
+  })
+  afterEach(() => {
+    FJCPopup.prototype.showSubset = showSubset
+    
+  })
+
+  test('showSplit', () => {
+    expect.assertions(10)
+  
+    const fjcButtons = $(FJCPopup.HTML.BUTTONS_HTML)  
+    const popup = new FJCPopup(options)
+    let fjcFeatures = [fjcFeature]
+    let otherFeatures = [nonFjcFeature]
+    let features = [fjcFeature, nonFjcFeature]
+
+    popup.content.append('<span class="total"></span>')
+    
+    popup.showSplit(fjcFeatures, otherFeatures)
+  
+    expect(popup.fjcFeatures).toBe(fjcFeatures)
+    expect(popup.otherFeatures).toBe(otherFeatures)
+  
+    expect(popup.content.find('span.total').length).toBe(1)
+    expect(popup.content.find('span.total').next()[0]).toBe(popup.content.find('span.count-of')[0])
+  
+
+    popup.fjcButtons.find('.fjc').trigger('click')
+    expect(popup.showSubset).toHaveBeenCalledTimes(1)
+
+    let fjcButton = popup.fjcButtons.find('.fjc').html(`${'Brooklyn Family Justice Center <br> - Click for details'}`)
+
+    expect(fjcButton.length).toBe(1)
+
+    let fjcContent = popup.content.find('.fjc-btns')
+    expect(fjcContent.children().length).toBe(4)
+  
+    let itContent = popup.content.find('.it-pg')
+    expect(itContent.length).toBe(0)
+  
+
+    otherFeatures = []
+    popup.showSplit(fjcFeatures, otherFeatures)
+    
+    let otherContent = popup.fjcButtons.find('.other')
+    let hrContent = popup.fjcButtons.find('.hr')
+    
+    expect(otherContent.length).toBe(0)
+    expect(hrContent.length).toBe(0)
+  
+  })
+  
 })
 
 
-// test('showSplit', () => {
+describe('showSubset', () => {
+  const pagerShow = FJCPopup.prototype.pagerShow
 
+  test('showSubset if FJC is clicked', () => {
+    expect.assertions(3)
 
-// })
+    let fjcFeatures = [fjcFeature]    
+    let otherFeatures = [nonFjcFeature]
+    const popup = new FJCPopup(options)
+    
+    popup.content.append('<span class="total"></span>')
+    
+    popup.showSplit(fjcFeatures, otherFeatures)
 
-// describe('showSubset', () => {
-//   test('showSubset if FJC is clicked', () => {
+    popup.fjcButtons.find('.fjc').trigger('click')
+    expect(popup.content.find('button.fjc').css('display')).toBe('none')
+    expect(popup.content.find('button.other').css('display')).toBe('inline-block')
+    expect(popup.content.find('.count-of').text()).toBe(' Family Justice Centers')
   
-//     //button.fjc is hidden
-//     //button.other is visible
-//     //count of 'Family Justice Centers' is visible
-//     //.fjc-btns is visible if there are no other facilities at location
-  
-//   })
+  })
 
-//   test('showSubset if FJC is clicked && otherFeatures == 0', () => {
+  test('showSubset if FJC is clicked && otherFeatures == 0', () => {
+    expect.assertions(2)
   
-//     //button.fjc is hidden
-//     //button.other is visible
-//     //count of 'Family Justice Centers' is visible
-//     //.fjc-btns is hidden 
-  
-//   })
-  
-//   test('showSubset if other is clicked', () => {
-  
-//     //button.fjc is visible
-//     //button.other is hidden
-//     //count of 'Other Facilities' is visible
-  
+    let fjcFeatures = [fjcFeature]  
+    let otherFeatures = []     
+    const popup = new FJCPopup(options)
+    popup.content.append('<span class="total"></span>')
 
-//   })
+    popup.showSplit(fjcFeatures, otherFeatures)
+    popup.fjcButtons.find('.fjc').trigger('click')
 
-//   test('showSubset either case', () => {
+    expect(popup.content.find('.count-of').text()).toBe(' Family Justice Centers')
+    expect(popup.content.find('.fjc-btns').css('display')).toBe('none')
   
-//     //in either case
-//       //.fjc-btns css padding top and bottom set to 10px
-//       //website button and hr is hidden
-//       //pager is visible
-
-//   })
+  })
+  
+  test('showSubset if other is clicked', () => {
+    expect.assertions(4)
+    
+    let fjcFeatures = [fjcFeature]    
+    let otherFeatures = [nonFjcFeature]
+    const popup = new FJCPopup(options)
+    popup.content.append('<span class="total"></span>')
 
 
-// })
+    popup.showSplit(fjcFeatures, otherFeatures)  
+    popup.fjcButtons.find('button.other').trigger('click')
+    expect(popup.content.find('button.fjc').css('display')).toBe('inline-block')
+    expect(popup.content.find('button.other').css('display')).toBe('none')
+    expect(popup.content.find('.fjc-btns').css('display')).toBe('block')
+
+    expect(popup.content.find('.count-of').text()).toBe(' Other Facilities')
+    
+  
+  })
+
+  test('showSubset either case', () => {
+  
+    expect.assertions(9)
+    let fjcFeatures = [fjcFeature]    
+    let otherFeatures = [nonFjcFeature]
+    const popup = new FJCPopup(options)
+    FJCPopup.prototype.pagerShow = jest.fn()
+
+    popup.showSplit(fjcFeatures, otherFeatures)  
+      
+    popup.fjcButtons.find('button.other').trigger('click')
+
+    expect(popup.pagerShow.mock.calls[0][0].length).toBe(1)
+    expect(popup.pagerShow.mock.calls[0][0][0]).toEqual(nonFjcFeature)
+      
+    popup.fjcButtons.find('.fjc').trigger('click')
+
+    expect(popup.pagerShow.mock.calls[0][0].length).toBe(1)
+    expect(popup.pagerShow.mock.calls[1][0][0]).toEqual(fjcFeature)
+
+    expect(popup.content.find('.fjc-btns').css('padding-bottom')).toBe('10px')
+    expect(popup.content.find('.fjc-btns').css('padding-top')).toBe('10px')
+    expect(popup.content.find('a.web').css('display')).toBe('none')
+    expect(popup.content.find('.fjc-btns hr').css('display')).toBe('none')
+
+    expect(FJCPopup.prototype.pagerShow).toHaveBeenCalledTimes(2)
+ 
+    FJCPopup.prototype.pagerShow = pagerShow
+    
+  })
+
+
+})

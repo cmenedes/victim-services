@@ -17,7 +17,7 @@ class FJCPopup extends MultiFeaturePopup {
   constructor(options){
     super(options)
   }
-
+ 
   showFeatures(features, coordinate) {
     coordinate = coordinate || olExtentGetCenter(features[0].getGeometry().getExtent())
     this.content.find('.fjc-btns, .count-of').remove()
@@ -41,20 +41,20 @@ class FJCPopup extends MultiFeaturePopup {
   }
 
   showSplit(fjcFeatures, otherFeatures) {
-    const fjcButtons = $(FJCPopup.HTML.BUTTONS_HTML)
+    this.fjcButtons = $(FJCPopup.HTML.BUTTONS_HTML)
     this.fjcFeatures = fjcFeatures
     $(FJCPopup.HTML.COUNT_OF_HTML).insertAfter(this.content.find('span.total'))
     this.otherFeatures = otherFeatures
     if (otherFeatures.length === 0) {
-      fjcButtons.find('.other').remove()
-      fjcButtons.find('hr').remove()
+      this.fjcButtons.find('.other').remove()
+      this.fjcButtons.find('hr').remove()
     }
-    fjcButtons.find('button').click($.proxy(this.showSubset, this))
-    fjcButtons.find('.fjc').html(`${fjcFeatures[0].get('LOCATION_NAME')} <br> - Click for details`)
+    this.fjcButtons.find('button').click($.proxy(this.showSubset, this))
+    this.fjcButtons.find('.fjc').html(`${fjcFeatures[0].get('LOCATION_NAME')} <br> - Click for details`)
     .append()
     this.content.find('.fjc-btns').show()
     this.content.find('.it-pg').hide()
-    this.content.append(fjcButtons)
+    this.content.append(this.fjcButtons)
   }
 
   showSubset(event) {
@@ -64,7 +64,7 @@ class FJCPopup extends MultiFeaturePopup {
       this.content.find('button.fjc').hide()
       this.content.find('button.other').show()
       this.content.find('.count-of').html(' Family Justice Centers')
-      if(this.otherFeatures.length == 0)  {
+      if(this.otherFeatures.length === 0)  {
         this.content.find('.fjc-btns').hide()
       }
     } else {
