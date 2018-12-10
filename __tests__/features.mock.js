@@ -128,4 +128,16 @@ const notAccessibleFeature = csvPoint.readFeature(notAccessibleFeatureSource)
 nyc.mixin(notAccessibleFeature, [decorations])
 
 
-module.exports = {notAccessibleFeature, accessibleFeature}
+const otherFeatureSource = {
+  ORGANIZATION_NAME: 'Organization 3',
+  LOCATION_NAME: 'Organization 3 Center',
+  ADDRESS_1: '2 Metrotech Center',
+  ADDRESS_2: 'Brooklyn, NY 11201',
+  X: 1,
+  Y: 2,
+}
+const otherFeature = csvPoint.readFeature(otherFeatureSource)
+nyc.mixin(otherFeature, [decorations])
+
+
+module.exports = {notAccessibleFeature, accessibleFeature, otherFeature}

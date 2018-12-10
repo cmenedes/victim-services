@@ -1,6 +1,6 @@
 import decorations from '../src/js/decorations'
 import OlFeature from 'ol/Feature';
-import {notAccessibleFeature, accessibleFeature} from './features.mock'
+import {notAccessibleFeature, accessibleFeature, otherFeature} from './features.mock'
 import nyc from 'nyc-lib/nyc'
 
 
@@ -15,24 +15,45 @@ describe('decorations', () => {
     })
 
   test('extendFeature', () => {
-    expect.assertions(8)
+    expect.assertions(11)
     accessibleFeature.extendFeature()
+    otherFeature.extendFeature()
+    
     expect(accessibleFeature.locationKey).toBe(`${accessibleFeature.get('X')}@${accessibleFeature.get('Y')}`)
     expect(accessibleFeature.get('search_label')).toBe(
-      `<span class="srch-lbl-lg${accessibleFeature.get('WHEELCHAIR_ACCESS') === '1' ? 1 : 0}${accessibleFeature.get('LOCATION_NAME').toLowerCase().indexOf('family justice center') > -1 ? '1' : '0'}">${accessibleFeature.get('ORGANIZATION_NAME')}</span><br>
+      `<span class="srch-lbl-lg${accessibleFeature.get('WHEELCHAIR_ACCESS') == '1' ? 1 : 0}${accessibleFeature.get('LOCATION_NAME').toLowerCase().indexOf('family justice center') > -1 ? '1' : '0'}">${accessibleFeature.get('ORGANIZATION_NAME')}</span><br>
       <span class="srch-lbl-sm">${accessibleFeature.get('LOCATION_NAME')}</span>`)
-    expect(accessibleFeature.get('other_languages')).toBe(`${accessibleFeature.get('OTHER_LANGUAGE') !== '' ? '1' : ''}`)
-    expect(accessibleFeature.get('fjc')).toBe(`${accessibleFeature.get('LOCATION_NAME').toLowerCase().indexOf('family justice center') > -1 ? '1' : ''}`)
-    /* TODO: test count by location */
-  
-    
-      const point = accessibleFeature.getGeometry()
-      const xy = point.getCoordinates()
+    expect(otherFeature.get('search_label')).toBe(
+      `<span class="srch-lbl-lg00">${otherFeature.get('ORGANIZATION_NAME')}</span><br>
+      <span class="srch-lbl-sm">${otherFeature.get('LOCATION_NAME')}</span>`)
 
-      expect(point.containsXY(xy[0],xy[1])).toBe(true)
-      expect(point.containsXY(xy[0],3)).toBe(false)
-      expect(point.containsXY(2,xy[1])).toBe(false)
-      expect(point.containsXY(0,3)).toBe(false)
+    expect(accessibleFeature.get('other_languages')).toBe(`${accessibleFeature.get('OTHER_LANGUAGE') !== '' ? '1' : ''}`)
+    expect(otherFeature.get('other_languages')).toBe('')
+    
+    expect(accessibleFeature.get('fjc')).toBe(`${accessibleFeature.get('LOCATION_NAME').toLowerCase().indexOf('family justice center') > -1 ? '1' : ''}`)
+    
+    const point = accessibleFeature.getGeometry()
+    const xy = point.getCoordinates()
+
+    expect(point.containsXY(xy[0],xy[1])).toBe(true)
+    expect(point.containsXY(xy[0],3)).toBe(false)
+    expect(point.containsXY(2,xy[1])).toBe(false)
+    expect(point.containsXY(0,3)).toBe(false)
+
+    accessibleFeature.extendFeature()
+    
+    expect(accessibleFeature.countByLocation[accessibleFeature.locationKey]).toBe(2)  
+  })
+  test('getCountAtLocation', () => {
+    expect.assertions(1)
+    accessibleFeature.countByLocation[accessibleFeature.locationKey] = 0
+
+    accessibleFeature.extendFeature()
+    accessibleFeature.extendFeature()
+    accessibleFeature.extendFeature()
+    
+    expect(accessibleFeature.getCountAtLocation()).toBe(3)  
+
   })
 
   test('getAddress1', () => {
@@ -106,10 +127,12 @@ describe('decorations', () => {
   })
 
   test('hoursHtml', () => {
-    expect.assertions(2)
+    expect.assertions(3)
     expect(accessibleFeature.hoursHtml()).toEqual($('<div class="hours"><div class="name">Hours of operation:</div><div>Monday - Friday: 9 am - 5 pm<div></div></div> (Saturday: 8 am - 8 pm)</div>'))
     
     expect(notAccessibleFeature.hoursHtml()).toEqual($('<div class="hours"><div class="name">Hours of operation:</div><div>Monday - Friday: 9 am - 5 pm<div></div></div>'))
+
+    expect(otherFeature.hoursHtml()).toBe(undefined)
 
   })
 
@@ -129,16 +152,20 @@ describe('decorations', () => {
   })  
 
   test('languagesHtml', () => {
-    expect.assertions(2)
+    expect.assertions(3)
     expect(accessibleFeature.languagesHtml()).toEqual($('<div class="languages"><div class="name">Languages offered:</div><ul><li>spanish</li><li>arabic</li><li>bengali</li><li>chinese</li><li>french</li><li>haitian creole</li><li>italian</li><li>korean</li><li>polish</li><li>russian</li><li>urdu</li><li>yiddish</li><li>other language</li></ul></div>'))
     
     expect(notAccessibleFeature.languagesHtml()).toEqual($('<div class="languages"><div class="name">Languages offered:</div><ul><li>spanish</li><li>arabic</li><li>bengali</li><li>chinese</li><li>french</li><li>haitian creole</li><li>italian</li><li>korean</li><li>polish</li><li>russian</li><li>urdu</li><li>yiddish</li></ul></div>'))
    
+    expect(otherFeature.languagesHtml()).toBe(undefined)
+
+
   })  
 
   test('culturalHtml', () => {
     expect.assertions(2)
     expect(accessibleFeature.culturalHtml()).toEqual($('<div class="cultural"><div class="name">Cultural competency specializations:</div><div>All Communities</div></div>'))
+
     expect(notAccessibleFeature.culturalHtml()).toEqual(undefined)
   
   })
@@ -207,6 +234,12 @@ test('phoneHtml no ext', () => {
 
 })
 
+test('phoneHtml undefined', () => {
+  expect.assertions(1)
+
+  expect(otherFeature.phoneHtml()).toBe(undefined)
+
+})
 
 test('makeList', () => {
   expect.assertions(4)

@@ -38,14 +38,16 @@ const decorations = {
     const count = decorations.countByLocation[locationKey] || 0
     decorations.countByLocation[locationKey] = count + 1
     this.locationKey = locationKey
+    const access = this.getAccessible() || 0
+    const other = this.get('OTHER_LANGUAGE') || ''
     this.set(
       'search_label',
-      `<span class="srch-lbl-lg${this.get('WHEELCHAIR_ACCESS') === '1' ? 1 : 0}${this.get('LOCATION_NAME').toLowerCase().indexOf('family justice center') > -1 ? '1' : '0'}">${this.get('ORGANIZATION_NAME')}</span><br>
+      `<span class="srch-lbl-lg${access}${this.get('LOCATION_NAME').toLowerCase().indexOf('family justice center') > -1 ? '1' : '0'}">${this.get('ORGANIZATION_NAME')}</span><br>
       <span class="srch-lbl-sm">${this.get('LOCATION_NAME')}</span>`
     )
     this.set(
       'other_languages',
-      this.get('OTHER_LANGUAGE') !== '' ? '1' : '' 
+      other !== '' ? '1' : '' 
     )
     this.set(
       'fjc',
@@ -83,9 +85,6 @@ const decorations = {
   getFJC() {
     return this.get('fjc')
   },
-  cssClass() {
-    return this.get('fjc') ? 'fjc' : ''
-  },
   locationHtml() {
     const div = $('<div class="location notranslate" translate="no"></div>')
     return div.html(this.get('LOCATION_NAME'))
@@ -105,8 +104,10 @@ const decorations = {
       
   },
   phoneHtml(button) {
-    const phone = this.get('PHONE').split(' ')[0].trim()
+    let phone = this.get('PHONE')
+    
     if (phone){
+      phone = phone.split(' ')[0].trim()
       let result
       let ext = this.get('EXT')
       const readable = ext ? ' ext. ' + ext : ''
@@ -136,14 +137,18 @@ const decorations = {
       .append(this.culturalHtml())
   },
   hoursHtml() {
-    const hrs = $('<div class="hours"></div>')
-    hrs.append('<div class="name">Hours of operation:</div>')
-      .append(`<div>${this.get('MAIN_HOURS_OF_OPERATION')}<div>`)
+    const hours = this.get('MAIN_HOURS_OF_OPERATION')
+    let hrsDiv
+    if(hours) {
+      hrsDiv = $('<div class="hours"></div>')
+      hrsDiv.append('<div class="name">Hours of operation:</div>')
+        .append(`<div>${hours}<div>`)
+    }
     const wkend = this.get('WEEKEND_HOURS_OF_OPERATION')
     if (wkend){
-      hrs.append(` (${wkend})`)
+      hrsDiv.append(` (${wkend})`)
     }
-    return hrs
+    return hrsDiv
   },
   eligibilityHtml() {
     const eligibility = this.get('ELIGIBILITY_CRITERIA')
