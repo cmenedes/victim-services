@@ -193,7 +193,7 @@ a.filter-info {
   cursor: pointer;
 } 
 
-.filter-info {
+.filter-reveal {
   display: none;
   line-height: 130%;
   font-weight: normal;

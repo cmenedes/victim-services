@@ -34,11 +34,11 @@ new App({
         {
           name: 'INTIMATE_PARTNER_VIOLENCE',
           values: ['1'],
-          label: 'Intimate partner violence <a class="filter-info" onClick="$(this).next().slideToggle();">?</a><div class="filter-info">Physical, sexual, psychological, or economic abuse that occurs between a former husband/wife, boyfriend/girlfriend, child\'s mother/father or a partner that someone lives with or used to live with</div>'
+          label: 'Intimate partner violence <a class="filter-info" onClick="$(this).next().slideToggle();">?</a><div class="filter-reveal">Physical, sexual, psychological, or economic abuse that occurs between a former husband/wife, boyfriend/girlfriend, child\'s mother/father or a partner that someone lives with or used to live with</div>'
         }, {
           name: 'FAMILY_VIOLENCE',
           values: ['1'],
-          label: 'Family violence <a class="filter-info" onClick="$(this).next().slideToggle();">?</a><div class="filter-info">Physical, sexual, psychological, or economic abuse that occurs between family members</div>'
+          label: 'Family violence <a class="filter-info" onClick="$(this).next().slideToggle();">?</a><div class="filter-reveal">Physical, sexual, psychological, or economic abuse that occurs between family members</div>'
         }, {
           name: 'SEXUAL_ASSAULT',
           values: ['1'],
