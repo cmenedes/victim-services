@@ -203,6 +203,10 @@ a.filter-info {
   font-weight: bold;
 }
 
+.chc-chc::-ms-expand{
+  display: none;
+}
+
 .clps div.content {
   background-color: #CCE1E6;
   line-height: 20px;
@@ -222,8 +226,8 @@ a.filter-info {
 }
 
 .dtl ul {
-  padding-inline-start: 25px;
-  margin-block-start: 3px;
+  padding-left: 25px;
+  margin-top: 3px;
   margin-bottom: 5px;
 }
 
@@ -288,6 +292,11 @@ a.filter-info {
 .pop>.content {
   overflow-x: hidden;
   max-width: 320px;
+}
+
+.fullscreen.pop > .content {
+  width: 100%; 
+  max-width: 100%;
 }
 
 .fjc-btns {

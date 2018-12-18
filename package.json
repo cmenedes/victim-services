@@ -23,7 +23,7 @@
   "homepage": "https://github.com/cmenedes/victim-services#readme",
   "dependencies": {
     "jquery": "^3.3.1",
-    "nyc-lib": "^1.2.02",
+    "nyc-lib": "^1.2.10",
     "ol": "5.3.0",
     "papaparse": "^4.5.1",
     "proj4": "^2.4.4"
@@ -38,7 +38,7 @@
     "coveralls": "^3.0.2",
     "jest": "^23.1.0",
     "jest-fetch-mock": "^1.6.5",
-    "nyc-build-helper": "^0.0.23",
+    "nyc-build-helper": "^0.0.27",
     "webpack": "4.8.3",
     "webpack-cli": "2.0.14"
   },

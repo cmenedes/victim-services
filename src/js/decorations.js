@@ -188,6 +188,7 @@ const decorations = {
   },
   makeList(list, other) {
     const ul = $('<ul></ul>')
+    list.sort()
     list.forEach(item => {
       if(this.get(item)){
         const li = $('<li></li>').html(item.toLowerCase().replace(/_/g, ' ').replace(/-/g, ' '))
