@@ -203,10 +203,6 @@ a.filter-info {
   font-weight: bold;
 }
 
-.chc-chc::-ms-expand{
-  display: none;
-}
-
 .clps div.content {
   background-color: #CCE1E6;
   line-height: 20px;

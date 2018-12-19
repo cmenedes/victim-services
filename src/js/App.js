@@ -15,6 +15,7 @@ class App extends FinderApp {
    * @constructor
    */  
   constructor(options) {
+    options.filterChoiceOptions = App.sortFilters(options.filterChoiceOptions)
     super(options)
     this.makePopup()
   }
@@ -75,5 +76,12 @@ class App extends FinderApp {
   }
 }
 
+App.sortFilters = (filters) => {
+  for(let i in filters) {
+    filters[i].choices.sort((a,b) => 
+      (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+  }
+  return filters
+}
 
 export default App
