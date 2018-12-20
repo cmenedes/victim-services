@@ -15,6 +15,31 @@ span.srch-lbl-sm {
   padding-left: 170px;
 }
 
+
+.fnd #banner span {
+  cursor: pointer;
+}
+
+.fnd #banner>div {
+  overflow: hidden;
+  background-color: #046;
+  text-overflow: ellipsis;
+}
+
+@media only screen and (max-width : 580px) {
+  .fnd #banner {
+    padding-left: 80px;
+  }
+}
+@media only screen and (max-width : 410px) {
+  .fnd #banner {
+    padding-left: 170px;
+  }
+  .fnd #banner span {
+    display: none;
+  }
+}
+
 .reset {
   width: 100px;
   margin-left: calc(50% - 50px);

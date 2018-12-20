@@ -4,7 +4,7 @@ import facilityStyle from './facility-style'
 import CsvPoint from 'nyc-lib/nyc/ol/format/CsvPoint'
 
 new App({
-  title: '<span class="screen-reader-only">NYC Criminal Justice</span>Victim Services Finder',
+  title: '<span class="screen-reader-only">NYC Criminal Justice</span><span>Victim Services Finder</span>',
   splashOptions: {
     message: $('#splash-content'),
     buttonText: ['Continue to map']

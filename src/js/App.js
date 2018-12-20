@@ -17,6 +17,7 @@ class App extends FinderApp {
   constructor(options) {
     options.filterChoiceOptions = App.sortFilters(options.filterChoiceOptions)
     super(options)
+    $('#banner span').on('click', () => document.location.reload())
     this.makePopup()
   }
 
