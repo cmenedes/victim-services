@@ -15,7 +15,6 @@ span.srch-lbl-sm {
   padding-left: 170px;
 }
 
-
 .fnd #banner span {
   cursor: pointer;
 }
@@ -31,7 +30,7 @@ span.srch-lbl-sm {
     padding-left: 80px;
   }
 }
-@media only screen and (max-width : 410px) {
+@media only screen and (max-width : 415px) {
   .fnd #banner {
     padding-left: 170px;
   }
@@ -377,4 +376,20 @@ a.btn.rad-all.web font {
 
 .fnd .splash button.btn.rad-all.call {
   height: 65px;
+}
+
+@media only screen and (max-width: 315px){
+  #back-to-map {
+      width: 90px;
+  }
+}
+
+@media only screen and (max-width: 360px){
+  #back-to-map {
+      width: 150px;
+  }
+}
+
+#back-to-map.btn:before {
+  background-color: transparent;
 }
