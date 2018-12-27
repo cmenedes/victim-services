@@ -294,7 +294,7 @@ a.filter-info {
 }
 
 .fnd .splash .dia a.btn-ok {
-  width: 225px;
+  width: 75%;
 }
 
 .dia-msg h1 {
@@ -392,4 +392,11 @@ a.btn.rad-all.web font {
 
 #back-to-map.btn:before {
   background-color: transparent;
+}
+
+@media only screen and (max-width: 400px) {
+.fnd .splash .dia {
+    width: 286px;
+    left: calc(50% - 152px);
+  }
 }
