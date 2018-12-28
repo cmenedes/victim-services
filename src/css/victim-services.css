@@ -335,24 +335,25 @@ a.filter-info {
 .it-pg .btns {
   width: calc(100% - 3px);
 }
-@media only screen and (max-width : 499px) {
-  .phone-dia .dia, .info-dia .dia {
-    width: 90%;
-    height: auto;
-    padding: 8px;
-    margin-left: calc(-45% - 8px);
-  }
-}
 
-@media only screen and (max-height : 400px) {
+ @media only screen and (max-height : 350px) {
+  .phone-dia .dia, .info-dia .dia {
+    overflow: auto;
+    display: block;
+    height: 98%;
+    margin-top: -147px;
+  }
+  .dia-btns {
+    margin-bottom: -10px;
+  }
+} 
+@media only screen and (max-width : 400px) {
   .phone-dia .dia, .info-dia .dia {
     width: 90%;
-    height: auto;
-    max-height: 290px;
-    padding: 8px;
-    margin-left: calc(-45% - 8px);
+    margin-left: -49%;
   }
-}
+
+} 
 
 .fjc-btns hr {
   color: black;
@@ -400,3 +401,10 @@ a.btn.rad-all.web font {
     left: calc(50% - 152px);
   }
 }
+
+@media only screen and (max-height: 400px) {
+  .fnd .splash .dia {
+    top: 15%;
+  }
+}
+
