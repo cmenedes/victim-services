@@ -10,6 +10,14 @@ jest.mock('../src/js/FJCPopup')
 jest.mock('nyc-lib/nyc/Choice')
 jest.mock('nyc-lib/nyc/Dialog')
 
+const mockDialog = {
+  
+}
+const options = {
+  filterChoiceOptions: 'filterChoiceOptions'
+}
+const sortFilters = App.sortFilters
+
 beforeEach(() => {
   $.resetMocks()
   FinderApp.mockReset()
@@ -20,17 +28,35 @@ beforeEach(() => {
 
 describe('constructor', () => {
   const makePopup = App.prototype.makePopup
+  const reload = document.location.reload
+  const banner = $('<div id="banner"><span></span></div>')
+
   beforeEach(() => {
     App.prototype.makePopup = jest.fn()
+    App.sortFilters = jest.fn()
+    document.location.reload = jest.fn()
+    $('body').append(banner)
   })
   afterEach(() => {
     App.prototype.makePopup = makePopup
+    App.sortFilters = sortFilters
+    document.location.reload = reload
+    banner.remove()
   })
 
   test('constructor', () => {
-    expect.assertions(1)
-    const app = new App('mock-options')
-    expect(app.makePopup).toHaveBeenCalledTimes(1)  
+    expect.assertions(6)
+    const app = new App(options)
+    expect(App.sortFilters).toHaveBeenCalledTimes(1)  
+    expect(App.sortFilters.mock.calls[0][0]).toBe('filterChoiceOptions')
+     
+    expect(app).toBeInstanceOf(FinderApp)
+    expect(FinderApp.mock.calls[0][0]).toBe(options)
+
+    expect(app.makePopup).toHaveBeenCalledTimes(1) 
+
+    $('#banner span').trigger('click')
+    expect(document.location.reload).toHaveBeenCalledTimes(1)
 
   })
 })
@@ -38,15 +64,17 @@ describe('constructor', () => {
 describe('makePopup', () => {
   const makePopup = App.prototype.makePopup
   beforeEach(() => {
+    App.sortFilters = jest.fn()
     App.prototype.makePopup = jest.fn()
   })
   afterEach(() => {
+    App.sortFilters = sortFilters
     App.prototype.makePopup = makePopup
   })
 
   test('makePopup', () => {
     expect.assertions(3)
-    const app = new App('mock-options')
+    const app = new App(options)
     app.makePopup = makePopup
     app.map = 'mock-map'
     app.layer = 'mock-layer'
@@ -79,10 +107,10 @@ describe('ready', () => {
   test('ready', () => {
     expect.assertions(11)
   
-    const app = new App('mock-options')
+    const app = new App(options)
 
     expect(FinderApp).toHaveBeenCalledTimes(1)
-    expect(FinderApp.mock.calls[0][0]).toBe('mock-options')
+    expect(FinderApp.mock.calls[0][0]).toBe(options)
 
     const features = []
     app.ready(features)
@@ -113,7 +141,7 @@ describe('ready', () => {
 test('resetFilters', () => {
   expect.assertions(16)
 
-  const app = new App('mock-options')
+  const app = new App(options)
 
   app.filters = {
     choiceControls: [new Choice(), new Choice(), new Choice(), new Choice()]
@@ -150,13 +178,13 @@ describe('dialogHandlers', () => {
   test('dialogHandlers', () => {
     expect.assertions(6)
 
-    const app = new App('mock-options')
+    const app = new App(options)
     
     app.dialogHandlers()
 
     expect(Dialog).toHaveBeenCalledTimes(2)
-    expect(Dialog.mock.calls[0][0]).toBe('phone-dia')
-    expect(Dialog.mock.calls[1][0]).toBe('info-dia')
+    expect(Dialog.mock.calls[0][0]).toEqual({css: 'phone-dia'})
+    expect(Dialog.mock.calls[1][0]).toEqual({css: 'info-dia'})
     app.splashBtn.trigger('click')
     expect(App.prototype.showPhoneDialog).toBeCalledTimes(1)
     app.phoneBtn.trigger('click')
@@ -189,9 +217,10 @@ describe('dialog tests', () => {
   test('showPhoneDialog', () => {
     expect.assertions(8)
 
-    const app = new App('mock-options')
+    const app = new App(options)
 
-    app.phoneDialog = new Dialog('phone-dia')
+    app.phoneDialog = new Dialog({css: 'phone-dia'})
+    app.phoneDialog.ok = jest.fn()
 
     expect(phoneContent.length).toBe(1)
     expect(dialogContainer.css('display')).toBe('block')
@@ -210,9 +239,10 @@ describe('dialog tests', () => {
   test('showInfoDialog', () => {
     expect.assertions(8)
 
-    const app = new App('mock-options')
+    const app = new App(options)
     
-    app.infoDialog = new Dialog('info-dia')
+    app.infoDialog = new Dialog({css: 'info-dia'})
+    app.infoDialog.ok = jest.fn()
 
     expect(infoContent.length).toBe(1)
     expect(dialogContainer.css('display')).toBe('block')
@@ -241,11 +271,75 @@ describe('isFiltered', () => {
   
   test('isFiltered', () => {
     expect.assertions(2)
-    const app = new App('mock-options')
+    const app = new App(options)
 
     expect(app.isFiltered()).toBe(false)
     filterButton.find('button').addClass('filtered')
     expect(app.isFiltered()).toBe(true)
     
+  })
+})
+
+describe('sortFilters', () => {
+  test('sortFilters: a > b', () => {
+    let filters = [
+      {
+        title: 'filter0',
+        choices: [
+          {name: 'B', values: ['1'], label: 'label'},
+          {name: 'A', values: ['1'], label: 'label'}
+        ]
+      }
+    ]
+    expect(App.sortFilters(filters)).toEqual([
+      {
+        title: 'filter0',
+        choices: [
+          {name: 'A', values: ['1'], label: 'label'},
+          {name: 'B', values: ['1'], label: 'label'}
+        ]
+      }
+    ])
+  })
+  test('sortFilters: b > a', () => {
+    let filters = [
+      {
+        title: 'filter0',
+        choices: [
+          {name: 'A', values: ['1'], label: 'label'},
+          {name: 'B', values: ['1'], label: 'label'}
+        ]
+      }
+    ]
+    expect(App.sortFilters(filters)).toEqual([
+      {
+        title: 'filter0',
+        choices: [
+          {name: 'A', values: ['1'], label: 'label'},
+          {name: 'B', values: ['1'], label: 'label'}
+        ]
+      }
+    ])
+  })
+
+  test('sortFilters: a == a', () => {
+    let filters = [
+      {
+        title: 'filter0',
+        choices: [
+          {name: 'A', values: ['1'], label: 'label'},
+          {name: 'A', values: ['1'], label: 'label'}
+        ]
+      }
+    ]
+    expect(App.sortFilters(filters)).toEqual([
+      {
+        title: 'filter0',
+        choices: [
+          {name: 'A', values: ['1'], label: 'label'},
+          {name: 'A', values: ['1'], label: 'label'}
+        ]
+      }
+    ])
   })
 })

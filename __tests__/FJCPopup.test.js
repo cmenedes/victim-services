@@ -124,10 +124,8 @@ describe('showFeatures', () => {
     
     let fjcContent = popup.content.find('.fjc-btns, .count-of')
     expect(fjcContent.length).toBe(0)
-
-    expect(FJCPopup.prototype.show.mock.calls[0][0]).toEqual({coordinate: [0,1]})
+    expect(FJCPopup.prototype.show.mock.calls[0][0]).toEqual({coordinate: [0, 111325.14286638486]})
     
-  
   })
 
   test('showFeatures - pagerShow: Multiple Features 2 nonFJC', () => {

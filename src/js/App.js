@@ -49,8 +49,8 @@ class App extends FinderApp {
   }
 
   dialogHandlers() {
-    this.phoneDialog = new Dialog('phone-dia')
-    this.infoDialog = new Dialog('info-dia')
+    this.phoneDialog = new Dialog({css: 'phone-dia'})
+    this.infoDialog = new Dialog({css: 'info-dia'})
     this.splashBtn = $('#splash-content button').click($.proxy(this.showPhoneDialog, this))
     this.phoneBtn = $('#phn a.btn-phn').click($.proxy(this.showPhoneDialog, this))
     this.infoBtn = $('#info a.btn-info').click($.proxy(this.showInfoDialog, this))
