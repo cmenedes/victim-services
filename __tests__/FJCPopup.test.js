@@ -39,7 +39,7 @@ const nonFjcFeatureSource = {
 const csvPoint = new CsvPoint({
   x: 'X',
   y: 'Y',
-  defaultDataProjection: 'EPSG:3857'
+  dataProjection: 'EPSG:3857'
 })
 const fjcFeature = csvPoint.readFeature(fjcFeatureSource)
 nyc.mixin(fjcFeature, [decorations])
@@ -124,7 +124,7 @@ describe('showFeatures', () => {
     
     let fjcContent = popup.content.find('.fjc-btns, .count-of')
     expect(fjcContent.length).toBe(0)
-    expect(FJCPopup.prototype.show.mock.calls[0][0]).toEqual({coordinate: [0, 111325.14286638486]})
+    expect(FJCPopup.prototype.show.mock.calls[0][0]).toEqual({coordinate: [0, 1]})
     
   })
 

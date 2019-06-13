@@ -143,24 +143,62 @@ describe('decorations', () => {
     expect(notAccessibleFeature.eligibilityHtml()).toEqual(undefined)
   })
 
-  test('servicesHtml', () => {
-    expect.assertions(2)
-    expect(accessibleFeature.servicesHtml()).toEqual($('<div class="services"><div class="name">Services offered:</div><ul><li>case management</li><li>crisis intervention</li><li>legal services</li><li>safety planning</li><li>immigration services</li><li>emergency or transitional shelter</li><li>permanent housing</li><li>health care</li><li>mental health counseling</li><li>drug addiction screening and treatment</li><li>language interpretation</li><li>public benefits</li><li>job training and economic empowerment</li><li>restorative justice</li><li>other health services</li></ul></div>'))
+  describe('servicesHtml', () => {
+    const makeList = accessibleFeature.makeList
+    const result = $('<div class="services"><div class="name">Services offered:</div><ul><li>mockService<li></ul></div>')
+    beforeEach(() => {
+      accessibleFeature.makeList = jest.fn().mockImplementation(() => {
+        return $('<ul><li>mockService<li></ul>')
+      })
+    })
+    afterEach(() => {
+      accessibleFeature.makeList = makeList
+    })
+    test('servicesHtml', () => {
+      expect.assertions(5)
+      accessibleFeature.extendFeature()
 
-    expect(notAccessibleFeature.servicesHtml()).toBe(undefined)
-    
-  })  
+      expect(accessibleFeature.servicesHtml()).toEqual(result)
+      expect(accessibleFeature.makeList).toHaveBeenCalledTimes(1)
+      expect(accessibleFeature.makeList.mock.calls[0][0]).toBe(decorations.services)
+      expect(accessibleFeature.makeList.mock.calls[0][1]).toBe(accessibleFeature.get('OTHER_SERVICE'))
+  
+      accessibleFeature.makeList = jest.fn().mockImplementation(() => {
+        return $('<ul></ul>')
+      })
+      accessibleFeature.extendFeature()
+      expect(accessibleFeature.servicesHtml()).toBe(undefined)
 
-  test('languagesHtml', () => {
-    expect.assertions(3)
-    expect(accessibleFeature.languagesHtml()).toEqual($('<div class="languages"><div class="name">Languages offered:</div><ul><li>spanish</li><li>arabic</li><li>bengali</li><li>chinese</li><li>french</li><li>haitian creole</li><li>italian</li><li>korean</li><li>polish</li><li>russian</li><li>urdu</li><li>yiddish</li><li>other language</li></ul></div>'))
-    
-    expect(notAccessibleFeature.languagesHtml()).toEqual($('<div class="languages"><div class="name">Languages offered:</div><ul><li>spanish</li><li>arabic</li><li>bengali</li><li>chinese</li><li>french</li><li>haitian creole</li><li>italian</li><li>korean</li><li>polish</li><li>russian</li><li>urdu</li><li>yiddish</li></ul></div>'))
-   
-    expect(otherFeature.languagesHtml()).toBe(undefined)
+    })  
+  })
+  describe('languagesHtml', () => {
+    const makeList = accessibleFeature.makeList
+    const result = $('<div class="languages"><div class="name">Languages offered:</div><ul><li>mockLanguage<li></ul></div>')
+    beforeEach(() => {
+      accessibleFeature.makeList = jest.fn().mockImplementation(() => {
+        return $('<ul><li>mockLanguage<li></ul>')
+      })
+    })
+    afterEach(() => {
+      accessibleFeature.makeList = makeList
+    })
+    test('languagesHtml', () => {
+      expect.assertions(5)
+      accessibleFeature.extendFeature()
 
-
-  })  
+      expect(accessibleFeature.languagesHtml()).toEqual(result)
+      expect(accessibleFeature.makeList).toHaveBeenCalledTimes(1)
+      expect(accessibleFeature.makeList.mock.calls[0][0]).toBe(decorations.languages)
+      expect(accessibleFeature.makeList.mock.calls[0][1]).toBe(accessibleFeature.get('OTHER_LANGUAGE'))
+  
+      accessibleFeature.makeList = jest.fn().mockImplementation(() => {
+        return $('<ul></ul>')
+      })
+      accessibleFeature.extendFeature()
+      expect(accessibleFeature.languagesHtml()).toBe(undefined)
+      
+    })  
+  })
 
   test('culturalHtml', () => {
     expect.assertions(2)
@@ -242,7 +280,7 @@ test('phoneHtml undefined', () => {
 })
 
 test('makeList', () => {
-  expect.assertions(4)
+  expect.assertions(6)
   let ul
   let listItem1 = 'ITEM-WITH-DASHES'
   let listItem2 = 'ITEM_WITH_UNDERSCORES'
@@ -264,5 +302,10 @@ test('makeList', () => {
 
   accessibleFeature.unset(listItem1)
   accessibleFeature.unset(listItem2)
+
+  let mockItems = ['mockLanguage']
+  ul = accessibleFeature.makeList(mockItems, '')
+  expect(ul.children().length).toBe(0)  
+  expect(ul).toEqual($('<ul></ul>'))
 
 })

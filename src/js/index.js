@@ -15,7 +15,7 @@ new App({
   facilityFormat: new CsvPoint({
     x: 'X',
     y: 'Y',
-    defaultDataProjection: 'EPSG:2263'
+    dataProjection: 'EPSG:2263'
   }),
   facilityStyle: facilityStyle.pointStyle,
   filterChoiceOptions: [
@@ -94,7 +94,7 @@ new App({
   ],
   facilitySearch: {displayField: 'search_label', nameField: 'ORGANIZATION_NAME'},
   decorations: decorations,
-  directionsUrl: 'https://maps.googleapis.com/maps/api/js?client=gme-newyorkcitydepartment&channel=pka&sensor=false&libraries=visualization'
+  directionsUrl: 'https://maps.googleapis.com/maps/api/js?client=gme-newyorkcitydepartment&channel=cvs&sensor=false&libraries=visualization'
 
 })
 

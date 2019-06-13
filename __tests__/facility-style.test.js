@@ -70,7 +70,6 @@ describe('pointStyle', () => {
     finderApp.isFiltered.mockImplementation(() => true)
 
     const style = facilityStyle.pointStyle(feature, 305.748113140705)
-
     expect(style.length).toBe(1)
     expect(style[0].getImage().getSrc()).toBe('img/stack.svg')
     expect(style[0].getImage().getScale()).toBe(12 / 33)
