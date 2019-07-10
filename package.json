@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "build": "webpack",
-    "prebuild": "yarn roll-css",
+    "prebuild": "yarn test && yarn roll-css",
     "roll-css": "./node_modules/nyc-lib/css/roll-css.sh ./src/css/victim-services.theme.css ./src/css/victim-services.css",
     "predeploy": "yarn build",
     "deploy": "node deploy"
@@ -22,8 +22,11 @@
   },
   "homepage": "https://github.com/cmenedes/victim-services#readme",
   "dependencies": {
+    "canvas-prebuilt": "1.6.11",
+    "handlebars": "4.1.0",
     "jquery": "^3.3.1",
-    "nyc-lib": "^1.2.95",
+    "mem": "4.0.0",
+    "nyc-lib": "^1.3.18",
     "ol": "^5.3.0",
     "papaparse": "^4.5.1",
     "proj4": "^2.4.4"
@@ -34,7 +37,6 @@
     "@babel/preset-env": "^7.4.5",
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.6",
-    "canvas-prebuilt": "1.6.11",
     "coveralls": "^3.0.2",
     "jest": "^24.8.0",
     "jest-fetch-mock": "^1.6.5",

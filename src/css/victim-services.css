@@ -82,6 +82,9 @@ a.btn.rad-all.call, button.btn.rad-all.call {
   width: 33px;
   z-index: 1;
 }
+.translated-rtl #phn {
+  left: 7px;
+}
 
 .btn-phn, a.btn-phn.btn-sq.rad-all {
   background-image: var(--phone-icon-light);
@@ -94,6 +97,9 @@ a.btn.rad-all.call, button.btn.rad-all.call {
   height: 35px;
   width: 33px;
   z-index: 1;
+}
+.translated-rtl #info {
+  left: 48px;
 }
 
 .btn-info {
@@ -152,7 +158,13 @@ a.btn.rad-all.call, button.btn.rad-all.call {
   background-color: var(--color-dark);
   opacity: 1;
 }
-            
+    
+.translated-rtl .facility .name, .translated-rtl .pop>.content .name {
+  padding-right: 0px;
+}
+.translated-rtl .pop>.content .name.accessible, .translated-rtl .pop>.content .name.accessible.fjc, .translated-rtl .pop>.content .name.fjc {
+  padding-right: 25px;
+}
 .facility .name.accessible, .srch-lbl-lg10 {
   background-image: url("../img/acc.svg");
   background-size: 20px;
@@ -216,6 +228,9 @@ a.filter-info {
   line-height: 130%;
   cursor: pointer;
 } 
+.translated-rtl a.filter-info {
+  float: left;
+}
 
 .filter-reveal {
   display: none;
@@ -282,6 +297,9 @@ a.filter-info {
   height: auto;
   margin-bottom: 5px;
   padding: 8px 30px;
+}
+.translated-rtl #info-content a, .translated-rtl #phone-content a {
+  background-position: calc(100% - 3px) center;
 }
 
 #info-content p {
@@ -365,14 +383,18 @@ a.filter-info {
 .fnd .pop .fjc-btns a {
   width: calc(100% - 12px);
 }
-
 .fnd .splash .dia-msg * {
-  color: unset;
+  color: inherit;
   text-align: left;
 }
-
+.translated-rtl .fnd .splash .dia-msg .call {
+  text-align: center;
+}
 a.btn.rad-all.web font {
   padding-left: 10px;
+}
+.translated-rtl a.btn.rad-all.web font {
+  padding-right: 10px;
 }
 
 .fnd .splash button.btn.rad-all.call {
@@ -407,4 +429,7 @@ a.btn.rad-all.web font {
     top: 15%;
   }
 }
-
+.translated-rtl a.btn.rad-all.phone {
+  padding-right: 28px;
+  padding-left: 0px;
+}
