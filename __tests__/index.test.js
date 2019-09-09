@@ -38,7 +38,7 @@ describe('App is created', () => {
 
     expect(App.mock.calls[0][0].decorations).toBe(decorations)
 
-    expect(App.mock.calls[0][0].directionsUrl).toBe('https://maps.googleapis.com/maps/api/js?client=gme-newyorkcitydepartment&channel=cvs&sensor=false&libraries=visualization')
+    expect(App.mock.calls[0][0].directionsUrl).toBe('https://maps.googleapis.com/maps/api/js?&sensor=false&libraries=visualization')
 
   })
 })
