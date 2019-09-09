@@ -2,8 +2,8 @@ span.srch-lbl-sm {
   font-size: 80%;
 }
 
-.srch {
-  left: 39px;
+.lst-srch .srch {
+  left: 0px;
 }
 
 .srch ul li:hover {

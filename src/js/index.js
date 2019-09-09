@@ -7,7 +7,7 @@ new App({
   title: '<span class="screen-reader-only">NYC Criminal Justice</span><span>Victim Services Finder</span>',
   splashOptions: {
     message: $('#splash-content'),
-    buttonText: ['Continue to map']
+    buttonText: ['Screen reader instructions', 'Continue to map']
   },
   geoclientUrl: 'https://maps.nyc.gov/geoclient/v1/search.json?app_key=74DF5DB1D7320A9A2&app_id=nyc-lib-example',
   facilityTabTitle: 'Locations',

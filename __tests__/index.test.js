@@ -16,7 +16,7 @@ describe('App is created', () => {
     expect(App.mock.calls[0][0].title).toEqual('<span class="screen-reader-only">NYC Criminal Justice</span><span>Victim Services Finder</span>')
 
     expect(App.mock.calls[0][0].splashOptions.message).toEqual($('#splash-content'))
-    expect(App.mock.calls[0][0].splashOptions.buttonText).toEqual(['Continue to map'])
+    expect(App.mock.calls[0][0].splashOptions.buttonText).toEqual(['Screen reader instructions','Continue to map'])
 
     expect(App.mock.calls[0][0].geoclientUrl).toEqual('https://maps.nyc.gov/geoclient/v1/search.json?app_key=74DF5DB1D7320A9A2&app_id=nyc-lib-example')
 
