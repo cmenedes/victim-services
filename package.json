@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/cmenedes/victim-services#readme",
   "dependencies": {
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "nyc-lib": "^1.3.66",
     "ol": "^5.3.0",
     "papaparse": "^4.5.1",
